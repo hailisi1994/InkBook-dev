@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+
+
+#自定义变量
+isbn:
+  url:
+    https://book.feelyou.top/isbn/

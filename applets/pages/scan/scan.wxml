@@ -1,0 +1,6 @@
+<!--logs.wxml-->
+<view>
+  <view>
+    <button bindtap='getScancode'>扫码</button>
+  </view>
+</view>
