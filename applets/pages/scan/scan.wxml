@@ -1,9 +1,10 @@
 <!--scan.wxml-->
 <view>
   <view>
-    <button type="default" 
-    bindtap='scanBarcode' 
-    primary loading="{{loading.status}}">{{loading.tips}}</button>
+    <button bindtap='test'>测试后端连接</button>
+  </view>
+  <view>
+    <button type="default" bindtap='scanBarcode' primary loading="{{loading.status}}">{{loading.tips}}</button>
   </view>
   <view class="section__ctn">
     <text>书名：{{book.title}}</text>
@@ -18,7 +19,6 @@
     <text>评分信息：{{book.rating.rating_info}}</text>
   </view>
   <view class="section__ctn">
-    <image style="width: 200px;height: 200px;background-color: #eeeeee;" 
-     mode="aspectFit" src="{{book.cover_url}}"></image>
+    <image style="width: 200px;height: 200px;background-color: #eeeeee;" mode="aspectFit" src="{{book.cover_url}}"></image>
   </view>
 </view>

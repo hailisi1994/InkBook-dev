@@ -1,6 +1,6 @@
 import util from '../../utils/util.js'
 import wxRequest from '../../utils/wxRequest.js'
-const { postRequest} = wxRequest;
+const { postRequest,getRequest} = wxRequest;
 const default_book = {
   title: '暂无',
   abstract: '暂无',
@@ -32,6 +32,7 @@ Page({
         postRequest('/passport/scanBarcode', res).then(
           (res) => {
             const book = res.data.data;
+            console.log(book)
             that.setData({ 
               book: book,
               loading: {
@@ -44,9 +45,10 @@ Page({
       }
     })
   },
-  mySetData: function(k,v){
-    console.log(k)
-    console.log(v)
-    this.setData({k,v})
-  }
+
+  test: function (e) {
+    wx.request({
+      url: 'http://192.168.0.101:8080/passport/test',
+    })
+    }
 })

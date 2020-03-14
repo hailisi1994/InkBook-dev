@@ -7,3 +7,9 @@ server:
 isbn:
   url:
     https://book.feelyou.top/isbn/
+
+# 获取微信openid的地址
+openidUrl: "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code"
+
+appid: wx0055f7d73b1fabd5
+secret: 8ac40fdd69b40cbd6a67bf5f29736582

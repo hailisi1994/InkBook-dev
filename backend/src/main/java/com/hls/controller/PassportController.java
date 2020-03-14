@@ -3,6 +3,7 @@ package com.hls.controller;
 import com.alibaba.fastjson.JSON;
 import com.hls.pojo.dto.BarcodeDTO;
 import com.hls.pojo.dto.BookInfoDTO;
+import com.hls.pojo.dto.WxLoginDTO;
 import com.hls.pojo.vo.ResponseEntity;
 import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,14 @@ public class PassportController {
 
     @Value("${isbn.url}")
     private String ISBN_URL;
+
+    @Value("${openidUrl}")
+    private String openidUrl;
+
+    @Value("${appid}")
+    private String appid;
+    @Value("${secret}")
+    private String secret;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -44,5 +53,14 @@ public class PassportController {
     public void test(){
         System.out.println("测试前后端连接");
     }
+
+    @PostMapping("/getOpenid")
+    public String getOpenid(@RequestBody WxLoginDTO wxLoginDTO){
+        System.out.println(wxLoginDTO);
+        String string = restTemplate.getForObject(String.format(openidUrl,appid,secret,wxLoginDTO.getCode()), String.class);
+
+        return string;
+    }
+
 
 }
