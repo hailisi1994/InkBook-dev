@@ -27,8 +27,8 @@ public class ResponseEntity {
         return new ResponseEntity().setStatus(200).setData(data);
     }
 
-    public static ResponseEntity error(Object data){
-        return new ResponseEntity().setStatus(500);
+    public static ResponseEntity errorMsg(String msg){
+        return new ResponseEntity().setStatus(500).setMsg(msg);
     }
 
     public static ResponseEntity errorMap(Object data){

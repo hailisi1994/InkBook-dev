@@ -62,4 +62,21 @@ public interface UserService {
      */
     boolean deleteById(String id);
 
+
+    /**
+     * 检查
+     *
+     * @param phone    电话
+     * @param password 密码
+     * @return {@link List<User>}
+     */
+    List<User> check(String phone, String password);
+
+    /**
+     * 检查用户是否存在
+     *
+     * @param phone 电话
+     * @return {@link Boolean}
+     */
+    Boolean checkExist(String phone);
 }

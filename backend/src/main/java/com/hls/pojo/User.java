@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * (User)实体类
@@ -83,13 +84,19 @@ public class User implements Serializable {
      * 创建时间
      */
     @Column(name = "create_time")
-    private String createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
     @Column(name = "update_time")
-    private String updateTime;
+    private Date updateTime;
+
+    /**
+     * 角色
+     */
+    @Column(name = "role")
+    private Integer role;
 
     /**
      * 确认密码

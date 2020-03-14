@@ -2,6 +2,7 @@ package com.hls.dao;
 
 import com.hls.pojo.User;
 import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author liangyehao
  * @since 2020-03-14 17:08:46
  */
-public interface UserDao {
+public interface UserDao extends Mapper<User> {
 
     /**
      * 通过ID查询单条数据
@@ -39,13 +40,13 @@ public interface UserDao {
      */
     List<User> queryAll(User user);
 
-    /**
-     * 新增数据
-     *
-     * @param user 实例对象
-     * @return 影响行数
-     */
-    int insert(User user);
+//    /**
+//     * 新增数据
+//     *
+//     * @param user 实例对象
+//     * @return 影响行数
+//     */
+//    int insert(User user);
 
     /**
      * 修改数据

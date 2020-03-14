@@ -4,9 +4,12 @@ import com.hls.pojo.User;
 import com.hls.dao.UserDao;
 import com.hls.service.UserService;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * (User)表服务实现类
@@ -60,6 +63,11 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User insert(User user) {
+        user.setId(UUID.randomUUID().toString());
+        user.setCreateTime(new Date());
+        user.setUpdateTime(new Date());
+        user.setIntegrity(10);
+        user.setRole(0);
         this.userDao.insert(user);
         return user;
     }
@@ -72,6 +80,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User update(User user) {
+        user.setUpdateTime(new Date());
         this.userDao.update(user);
         return this.queryById(user.getId());
     }
@@ -86,4 +95,38 @@ public class UserServiceImpl implements UserService {
     public boolean deleteById(String id) {
         return this.userDao.deleteById(id) > 0;
     }
+
+
+    /**
+     * 检查
+     *
+     * @param phone    电话
+     * @param password 密码
+     * @return {@link User}
+     */
+    @Override
+    public List<User> check(String phone, String password) {
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("phone",phone);
+        criteria.andEqualTo("password",password);
+
+        return userDao.selectByExample(example);
+    }
+
+    /**
+     * 检查用户是否存在
+     *
+     * @param phone 电话
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean checkExist(String phone) {
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("phone",phone);
+        List<User> users = userDao.selectByExample(example);
+        return users.size()>0;
+    }
+
 }
