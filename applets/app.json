@@ -1,13 +1,39 @@
 {
   "pages": [
+    "pages/login/login",
+    "pages/register/register",
+    "pages/user/user",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/bookCity/bookCity"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./images/tabBar/books_0.png",
+        "selectedIconPath": "./images/tabBar/books_1.png"
+      },
+      {
+        "pagePath": "pages/bookCity/bookCity",
+        "text": "书城",
+        "iconPath": "./images/tabBar/forum_0.png",
+        "selectedIconPath": "./images/tabBar/forum_1.png"
+      },
+      {
+        "pagePath": "pages/login/login",
+        "text": "我的",
+        "iconPath": "./images/tabBar/user_0.png",
+        "selectedIconPath": "./images/tabBar/user_1.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

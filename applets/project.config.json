@@ -11,8 +11,6 @@
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -20,11 +18,13 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.3",
-	"appid": "wx0055f7d73b1fabd5",
+	"appid": "wx3b998b448d0b223f",
 	"projectname": "applets",
 	"debugOptions": {
 		"hidedInDevtools": []
