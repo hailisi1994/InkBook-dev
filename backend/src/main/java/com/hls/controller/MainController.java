@@ -5,7 +5,6 @@ import com.hls.pojo.dto.BarcodeDTO;
 import com.hls.pojo.dto.BookInfoDTO;
 import com.hls.pojo.dto.WxLoginDTO;
 import com.hls.pojo.vo.ResponseEntity;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +17,8 @@ import org.springframework.web.client.RestTemplate;
  * @content
  */
 @RestController
-@RequestMapping("/passport")
-public class PassportController {
+@RequestMapping("/main")
+public class MainController {
 
     @Value("${isbn.url}")
     private String ISBN_URL;
