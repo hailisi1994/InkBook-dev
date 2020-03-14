@@ -26,4 +26,12 @@ public class ResponseEntity {
     public static ResponseEntity okMap(Object data){
         return new ResponseEntity().setStatus(200).setData(data);
     }
+
+    public static ResponseEntity error(Object data){
+        return new ResponseEntity().setStatus(500);
+    }
+
+    public static ResponseEntity errorMap(Object data){
+        return new ResponseEntity().setStatus(500).setData(data);
+    }
 }

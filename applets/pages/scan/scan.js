@@ -29,7 +29,7 @@ Page({
       success(res) {
         //扫码获取图书信息
         console.log(res)
-        postRequest('/passport/scanBarcode', res).then(
+        postRequest('/main/scanBarcode', res).then(
           (res) => {
             const book = res.data.data;
             console.log(book)
@@ -48,7 +48,7 @@ Page({
 
   test: function (e) {
     wx.request({
-      url: 'http://192.168.0.101:8080/passport/test',
+      url: 'http://192.168.0.101:8080/main/test',
     })
     }
 })

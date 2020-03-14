@@ -5,6 +5,7 @@ import com.hls.pojo.dto.BarcodeDTO;
 import com.hls.pojo.dto.BookInfoDTO;
 import com.hls.pojo.dto.WxLoginDTO;
 import com.hls.pojo.vo.ResponseEntity;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,10 @@ public class MainController {
     @PostMapping("/scanBarcode")
     public ResponseEntity scanBarcode(@RequestBody BarcodeDTO barcodeDTO){
         BookInfoDTO bookInfo = restTemplate.getForObject(ISBN_URL + barcodeDTO.getResult(), BookInfoDTO.class);
+        assert bookInfo != null;
+       Object o = restTemplate.getForObject("https://book.douban.com/subject/3622904/", Object.class);
+        String trim = bookInfo.getSummary().trim();
+        String[] split = StringUtils.split(trim, "/");
         String s = JSON.toJSONString(bookInfo);
         System.out.println(barcodeDTO);
         System.out.println(s);

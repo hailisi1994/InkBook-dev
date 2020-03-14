@@ -2,6 +2,7 @@ package com.hls.controller;
 
 
 import com.hls.pojo.User;
+import com.hls.pojo.vo.ResponseEntity;
 import com.hls.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.*;
@@ -17,9 +18,9 @@ import java.util.List;
  * @since 2020-03-14 17:08:49
  */
 @Slf4j
-@Api(value = "", tags = "", description = "")
+@Api(value = "用户接口", tags = "", description = "")
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
     /**
      * 服务对象
@@ -33,8 +34,8 @@ public class UserController {
      * @param id 主键
      * @return 单条数据
      */
-    @ApiOperation("")
-    @GetMapping("selectOne")
+    @ApiOperation("查询单个用户")
+    @GetMapping("/selectOne")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "", required = true, paramType = "query", dataType = "String", example = "0"),
     })
@@ -47,10 +48,30 @@ public class UserController {
      *
      * @return 单条数据
      */
-    @ApiOperation("")
-    @GetMapping("all")
+    @ApiOperation("查询所有用户")
+    @GetMapping("/all")
     public List<User> list() {
         return this.userService.queryAll(new User());
+    }
+
+
+    /**
+     * 注册
+     *
+     * @param user 用户
+     * @return {@link ResponseEntity}
+     */
+    @ApiOperation("用户注册")
+    @PostMapping("/regist")
+    public ResponseEntity regist(@RequestBody User user){
+        if(user==null){
+            return ResponseEntity.errorMap("注册信息不能为空!");
+        }
+        if(!user.getPassword().equals(user.getConfirmPwd())){
+            return ResponseEntity.errorMap("密码不一致!");
+        }
+        this.userService.insert(user);
+        return  ResponseEntity.ok();
     }
 
 }

@@ -14,12 +14,15 @@
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="integrity" column="integrity" jdbcType="INTEGER"/>
         <result property="avatarUrl" column="avatar_url" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="UserMap">
         select
-          id, openid, name, nick_name, age, pro, grade, gender, phone, integrity, avatar_url
+          id, openid, name, nick_name, age, pro, grade, gender, phone, integrity, avatar_url, password, create_time, lastupdate_time
         from user
         where id = #{id}
     </select>
@@ -27,7 +30,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserMap">
         select
-          id, openid, name, nick_name, age, pro, grade, gender, phone, integrity, avatar_url
+          id, openid, name, nick_name, age, pro, grade, gender, phone, integrity, avatar_url, password, create_time, lastupdate_time
         from user
         limit #{offset}, #{limit}
     </select>
@@ -35,7 +38,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="UserMap">
         select
-          id, openid, name, nick_name, age, pro, grade, gender, phone, integrity, avatar_url
+          id, openid, name, nick_name, age, pro, grade, gender, phone, integrity, avatar_url, password, create_time, lastupdate_time
         from user
         <where>
             <if test="id != null and id != ''">
@@ -71,13 +74,22 @@
             <if test="avatarUrl != null and avatarUrl != ''">
                 and avatar_url = #{avatarUrl}
             </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into user(openid, name, nick_name, age, pro, grade, gender, phone, integrity, avatar_url)
-        values (#{openid}, #{name}, #{nickName}, #{age}, #{pro}, #{grade}, #{gender}, #{phone}, #{integrity}, #{avatarUrl})
+        insert into user(id,openid, name, nick_name, age, pro, grade, gender, phone, integrity, avatar_url, password, create_time, update_time)
+        values (UUID(),#{openid}, #{name}, #{nickName}, #{age}, #{pro}, #{grade}, #{gender}, #{phone}, 10, #{avatarUrl}, #{password}, now(), now())
     </insert>
 
     <!--通过主键修改数据-->
@@ -113,6 +125,15 @@
             </if>
             <if test="avatarUrl != null and avatarUrl != ''">
                 avatar_url = #{avatarUrl},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                lastupdate_time = #{updateTime},
             </if>
         </set>
         where id = #{id}

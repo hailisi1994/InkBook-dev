@@ -31,7 +31,7 @@ function getRequest(url,data){
 }
 
 function postRequest(url, data) {
-  console.log('baseUrl',baseUrl)
+  console.log('Url',baseUrl+url)
   var postRequest = wxPromisify(wx.request);
   return postRequest({
     url: baseUrl+url,
