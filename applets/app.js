@@ -12,7 +12,6 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log('aaaa', res);
         postRequest('/main/getOpenid', res).then(res => {
           console.log('getOpenid', res);
         });
@@ -21,12 +20,10 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
-        console.log(1111, res);
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log(2222, res);
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
 
