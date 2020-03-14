@@ -10,10 +10,7 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
-  <view>
-    <button bindtap='getScancode'>扫码</button>
-  </view>
    <view>
-    <button bindtap='goTo'>进入详情</button>
+    <button bindtap='goToScanView'>扫描图书</button>
   </view>
 </view>

@@ -1,6 +1,24 @@
-<!--logs.wxml-->
+<!--scan.wxml-->
 <view>
   <view>
-    <button bindtap='getScancode'>扫码</button>
+    <button type="default" 
+    bindtap='scanBarcode' 
+    primary loading="{{loading.status}}">{{loading.tips}}</button>
+  </view>
+  <view class="section__ctn">
+    <text>书名：{{book.title}}</text>
+  </view>
+  <view class="section__ctn">
+    <text>摘要：{{book.abstract}}</text>
+  </view>
+  <view class="section__ctn">
+    <text>豆瓣评分：{{book.rating.star_count}}星</text>
+  </view>
+  <view class="section__ctn">
+    <text>评分信息：{{book.rating.rating_info}}</text>
+  </view>
+  <view class="section__ctn">
+    <image style="width: 200px;height: 200px;background-color: #eeeeee;" 
+     mode="aspectFit" src="{{book.cover_url}}"></image>
   </view>
 </view>

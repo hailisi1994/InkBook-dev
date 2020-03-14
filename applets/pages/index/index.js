@@ -2,7 +2,7 @@
 //获取应用实例
 const app = getApp()
 //引用请求工具类
-var req = require("../../utils/req.js")
+var wxRequest = require("../../utils/wxRequest.js")
 
 Page({
   data: {
@@ -53,21 +53,10 @@ Page({
       hasUserInfo: true
     })
   },
-  getScancode: function(e){
-    wx.scanCode({
-      success(res) {
-        console.log(JSON.stringify(res))
-        //扫码获取图书信息
-        // reqUtils.postReq(res,'/passport/scanBarcode');
-       req.postRequest('http://127.0.0.1:8080//passport/scanBarcode',res).then(
-         (res)=>{
-           console.log(res)
-         }
-       )
-      }
+  //事件处理函数
+  goToScanView: function () {
+    wx.navigateTo({
+      url: '../scan/scan'
     })
   },
-  goTo: function(e){
-    
-  }
 })

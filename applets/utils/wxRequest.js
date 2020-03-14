@@ -1,4 +1,6 @@
 var Promise = require('./es6-promise.js');
+import config from '../config/config.js'
+const {baseUrl} = config;
 
 function wxPromisify(fn){
   return function(obj={}){
@@ -21,7 +23,7 @@ Promise.prototype.finally = function(callback){
 function getRequest(url,data){
   var getRequest = wxPromisify(wx.request);
   return getRequest({
-    url:url,
+    url:baseUrl+url,
     method: 'GET',
     data: data,
     header: {'Content-Type':'application/json'}
@@ -29,9 +31,10 @@ function getRequest(url,data){
 }
 
 function postRequest(url, data) {
+  console.log('baseUrl',baseUrl)
   var postRequest = wxPromisify(wx.request);
   return postRequest({
-    url: url,
+    url: baseUrl+url,
     method: 'POST',
     data: data,
     header: { 'Content-Type': 'application/json' }
