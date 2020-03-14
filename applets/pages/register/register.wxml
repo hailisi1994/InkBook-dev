@@ -1,0 +1,65 @@
+<!--pages/register/register.wxml-->
+<view class="inner">
+  <view class="info-list">
+    <view class="info-item">
+      <image class="r-icon" mode="aspectFit" src="../../images/login/login-user.png"></image>
+      <view class="r-content">
+        <input class="weui-input" value="{{name}}" placeholder="请输入用户名" bindinput="bindUserNameInput" />
+      </view>
+    </view>
+    <view class="info-item">
+      <image class="r-icon" mode="aspectFit" src="../../images/login/login-password.png"></image>
+      <view class="r-content">
+        <input class="weui-input" value="{{password}}" password type="text" placeholder="请输入密码" bindinput="bindPasswordInput" />
+      </view>
+    </view>
+    <view class="info-item">
+      <image class="r-icon" mode="aspectFit" src="../../images/login/login-password.png"></image>
+      <view class="r-content">
+        <input class="weui-input" value="{{confirmPwd}}" password type="text" placeholder="请确认密码" bindinput="bindSurePasswordInput" />
+      </view>
+    </view>
+    <view class="info-item">
+      <image class="r-icon" mode="aspectFit" src="../../images/login/login-password.png"></image>
+      <view class="r-content">
+        <picker mode="selector" value="{{gradeIndex}}" range-key="value" range="{{gradeArray}}" bindchange="bindGradeChange">
+          <input wx:if="{{isShowGrade}}" disabled type="text" placeholder="请选择年级"/>
+          <view wx:else>{{gradeArray[gradeIndex].value}}</view>
+        </picker>
+      </view>
+    </view>
+    <!-- <view class="info-item">
+      <image class="r-icon" mode="aspectFit" src="../../images/login/login-password.png"></image>
+      <view class="r-content">
+        <picker mode="selector" value="{{sexIndex}}" range-key="value" range="{{sexArray}}" bindchange="bindSexChange">
+          <input wx:if="{{isShowSex}}" disabled type="text" placeholder="请选择性别"/>
+          <view wx:else>{{sexArray[sexIndex].value}}</view>
+        </picker>
+      </view>
+    </view> -->
+    <view class="info-item">
+      <image class="r-icon" mode="aspectFit" src="../../images/login/login-password.png"></image>
+      <view class="r-content">
+        <picker mode="selector" value="{{majorIndex}}" range-key="value" range="{{majorArray}}" bindchange="bindMajorChange">
+          <input wx:if="{{isShowMajor}}" disabled type="text" placeholder="请选择专业"/>
+          <view wx:else>{{majorArray[majorIndex].value}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="info-item">
+      <image class="r-icon" mode="aspectFit" src="../../images/login/login-password.png"></image>
+      <view class="r-content">
+        <input class="weui-input" value="{{phone}}" type="number" placeholder="联系方式" bindinput="bindPhoneInput" />
+      </view>
+    </view>
+    <view class="info-item">
+      <image class="r-icon" mode="aspectFit" src="../../images/login/login-password.png"></image>
+      <view class="r-content">
+        <input class="weui-input" value="{{age}}" type="number" placeholder="年龄" bindinput="bindAgeInput" />
+      </view>
+    </view>
+  </view>
+  <view class="login-btn-inner">
+    <button open-type="getUserInfo" bindgetuserinfo="register" lang="zh_CN" class="register-btn" type="primary">注册</button>
+  </view>
+</view>

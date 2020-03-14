@@ -1,0 +1,39 @@
+/* pages/login/login.wxss */
+.inner {
+  padding-top: 30rpx;
+}
+.info-list {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 60rpx;
+}
+.info-list .info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50rpx;
+}
+.info-list .info-item .r-icon {
+  display: block;
+  width: 32rpx;
+  height: 32rpx;
+  margin: 0 30rpx 0 80rpx;
+  flex: 0 0 auto;
+}
+.info-list .info-item .r-content {
+  flex: 1;
+}
+.r-content input{
+  width: 100%;
+  display: block;
+}
+
+.login-btn-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+}
+.login-btn-inner .login-btn {
+  margin-right: 40rpx;
+}

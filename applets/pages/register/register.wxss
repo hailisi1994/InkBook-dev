@@ -1,0 +1,38 @@
+/* pages/register/register.wxss */
+/* pages/login/login.wxss */
+.inner {
+  padding-top: 30rpx;
+}
+.info-list {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 100rpx;
+}
+.info-list .info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50rpx;
+}
+.info-list .info-item:last-child {
+  margin-bottom: 0;
+}
+.info-list .info-item .r-icon {
+  display: block;
+  width: 32rpx;
+  height: 32rpx;
+  margin: 0 40rpx 0 80rpx;
+  flex: 0 0 auto;
+}
+.info-list .info-item .r-content {
+  flex: 1;
+}
+.r-content input{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.login-btn-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

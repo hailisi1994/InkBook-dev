@@ -23,7 +23,7 @@ Promise.prototype.finally = function(callback){
 function getRequest(url,data){
   var getRequest = wxPromisify(wx.request);
   return getRequest({
-    url:baseUrl+url,
+    url: baseUrl+url,
     method: 'GET',
     data: data,
     header: {'Content-Type':'application/json'}
