@@ -3,6 +3,7 @@ package com.hls.pojo;
 import lombok.Data;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class User implements Serializable {
     /**
     * 主键
     */
+    @Id
     @Column(name = "id")
     private String id;
     /**
