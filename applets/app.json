@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/user/user",
     "pages/login/login",
     "pages/register/register",
-    "pages/user/user",
-    "pages/index/index",
     "pages/logs/logs",
     "pages/bookCity/bookCity"
   ],
@@ -28,7 +28,7 @@
         "selectedIconPath": "./images/tabBar/forum_1.png"
       },
       {
-        "pagePath": "pages/login/login",
+        "pagePath": "pages/user/user",
         "text": "我的",
         "iconPath": "./images/tabBar/user_0.png",
         "selectedIconPath": "./images/tabBar/user_1.png"

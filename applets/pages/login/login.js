@@ -59,13 +59,16 @@ Page({
         wx.hideLoading();
         const { data } = res;
         if (data.status === 200) {
+          wx.setStorageSync('userInfo', data.data);
           wx.showToast({
             title: '登录成功，正在跳转...',
             icon: 'none',
             mask: true,
             duration: 1500,
           });
-          wx.setStorageSync('userInfo', data.data);
+          wx.switchTab({
+            url: '../user/user',
+          });
         } else {
           wx.showToast({
             title: data.msg,
