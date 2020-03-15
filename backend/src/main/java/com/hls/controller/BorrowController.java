@@ -2,6 +2,7 @@ package com.hls.controller;
 
 import com.hls.pojo.Book;
 import com.hls.pojo.Borrow;
+import com.hls.pojo.vo.MineVO;
 import com.hls.pojo.vo.ResponseEntity;
 import com.hls.service.BorrowService;
 import org.springframework.web.bind.annotation.*;
@@ -56,8 +57,22 @@ public class BorrowController {
             @ApiImplicitParam(name = "id", value = "", required = true, paramType = "query", dataType = "String", example = "0"),
     })
     public ResponseEntity getMyBooks(@PathVariable("userId") String userId) {
+        MineVO mineVO = borrowService.getBooksByUserId(userId);
+        return ResponseEntity.okMap(mineVO);
+    }
 
-//        List<Book> books = borrowService.getBooksByUserId(userId);
-        return new ResponseEntity();
+
+    /**
+     * 添加借阅记录
+     *
+     * @param borrow 借
+     * @return {@link Borrow}
+     */
+    @ApiOperation("添加借阅记录")
+    @PostMapping("/add")
+    @ApiImplicitParams({})
+    public ResponseEntity add(@RequestBody Borrow borrow) {
+        Borrow save = borrowService.insert(borrow);
+        return ResponseEntity.okMap(save);
     }
 }

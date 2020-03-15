@@ -53,8 +53,9 @@ public class MainController {
     }
 
     @GetMapping("/test")
-    public void test(){
+    public ResponseEntity test(){
         System.out.println("测试前后端连接");
+        return ResponseEntity.ok();
     }
 
     @PostMapping("/getOpenid")

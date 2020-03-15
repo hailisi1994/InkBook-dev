@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hls.dao.CustomDao">
+
+    <!--
+    private String bookId;
+    private String title;
+    private String coverUrl;
+    private Date borrowTime;
+    private Date deadline;
+    private Integer leftDays;
+    -->
+    <resultMap type="com.hls.pojo.vo.BooksVO" id="BooksVoMap">
+        <result property="bookId" column="bookId"/>
+        <result property="title" column="title"/>
+        <result property="coverUrl" column="coverUrl"/>
+        <result property="borrowTime" column="borrowTime"/>
+        <result property="deadline" column="deadline"/>
+        <result property="leftDays" column="leftDays"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="getBooksByUserId" resultMap="BooksVoMap">
+        SELECT
+            bk.id AS bookId,
+            bk.title AS title,
+            bk.cover_url AS coverUrl,
+            brw.borrow_time AS borrowTime,
+            brw.deadline AS deadline,
+            ( SELECT ( datediff( brw.deadline, now( ) ) ) ) AS leftDays
+        FROM
+            book bk
+                LEFT JOIN borrow brw ON brw.book_id = bk.id
+        WHERE
+            brw.user_id = #{userId}
+            order by leftDays asc
+    </select>
+
+</mapper>
