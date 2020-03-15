@@ -47,8 +47,14 @@ Page({
   },
 
   test: function (e) {
-    wx.request({
-      url: 'http://192.168.0.101:8080/main/test',
+    getRequest('/main/test',{}).then((res)=>{
+      console.log(res)
+      wx.showToast({
+        title: '测试通过',
+        icon: 'none',
+        mask: true,
+        duration: 2000,
+      });
     })
-    }
+  }
 })

@@ -25,7 +25,7 @@ public class Borrow implements Serializable {
     * 学生编号
     */
     @Column(name = "user_id")
-    private Integer userId;
+    private String userId;
     /**
     * 书籍编号
     */
@@ -42,7 +42,7 @@ public class Borrow implements Serializable {
     @Column(name = "borrow_time")
     private Date borrowTime;
     /**
-    * 预期归还时间
+    * 归还时间
     */
     @Column(name = "return_time")
     private Date returnTime;
@@ -51,6 +51,12 @@ public class Borrow implements Serializable {
     */
     @Column(name = "if_return")
     private Integer ifReturn;
+
+    /**
+     * 还书期限
+     */
+    @Column(name = "deadline")
+    private Date deadline;
 
 
 }

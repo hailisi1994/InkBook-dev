@@ -1,12 +1,16 @@
 package com.hls.controller;
 
+import com.hls.pojo.Book;
 import com.hls.pojo.Borrow;
+import com.hls.pojo.vo.MineVO;
+import com.hls.pojo.vo.ResponseEntity;
 import com.hls.service.BorrowService;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Borrow)表控制层
@@ -40,4 +44,35 @@ public class BorrowController {
         return this.borrowService.queryById(id);
     }
 
+
+    /**
+     * 根据用户id查询借书信息
+     *
+     * @param userId 用户主键
+     * @return 借书信息
+     */
+    @ApiOperation("根据用户id查询借书信息")
+    @GetMapping("/getBooksByUserId/{userId}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "", required = true, paramType = "query", dataType = "String", example = "0"),
+    })
+    public ResponseEntity getMyBooks(@PathVariable("userId") String userId) {
+        MineVO mineVO = borrowService.getBooksByUserId(userId);
+        return ResponseEntity.okMap(mineVO);
+    }
+
+
+    /**
+     * 添加借阅记录
+     *
+     * @param borrow 借
+     * @return {@link Borrow}
+     */
+    @ApiOperation("添加借阅记录")
+    @PostMapping("/add")
+    @ApiImplicitParams({})
+    public ResponseEntity add(@RequestBody Borrow borrow) {
+        Borrow save = borrowService.insert(borrow);
+        return ResponseEntity.okMap(save);
+    }
 }

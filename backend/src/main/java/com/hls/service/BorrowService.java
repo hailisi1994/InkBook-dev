@@ -1,6 +1,7 @@
 package com.hls.service;
 
 import com.hls.pojo.Borrow;
+import com.hls.pojo.vo.MineVO;
 
 import java.util.List;
 
@@ -53,4 +54,11 @@ public interface BorrowService {
      */
     boolean deleteById(String id);
 
+    /**
+     * 根据用户id查询借书信息
+     *
+     * @param userId 用户Id
+     * @return {@link MineVO}
+     */
+    MineVO getBooksByUserId(String userId);
 }

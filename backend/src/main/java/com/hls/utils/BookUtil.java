@@ -1,6 +1,7 @@
 package com.hls.utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -15,8 +16,9 @@ public class BookUtil {
         return new SimpleDateFormat(format) .format(new Date() );
     }
 
-
     public static void main(String[] args) {
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(getIdByCurrentTime());
     }
 }
