@@ -1,7 +1,8 @@
 // pages/user/user.js
-import util from '../../utils/util.js'
+import utils from '../../utils/util.js'
 import wxRequest from '../../utils/wxRequest.js'
-const { postRequest } = wxRequest;
+const { getRequest } = wxRequest;
+const { formatDate } = utils;
 
 Page({
 
@@ -9,42 +10,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bookArr: [
-      {
-        id: 1,
-        img: '../../images/index/index-logo.png',
-        number: '455421',
-        name: '鲁滨孙漂流记',
-        dueTime: '2020年3月15日',
-        remainTime: '1天',
-      },
-      {
-        id: 2,
-        img: '../../images/index/index-logo.png',
-        number: '240421',
-        name: '西游记',
-        dueTime: '2020年4月15日',
-        remainTime: '30天',
-      },
-      {
-        id: 3,
-        img: '../../images/index/index-logo.png',
-        number: '455421',
-        name: '红楼梦',
-        dueTime: '2020年3月15日',
-        remainTime: '1天',
-      },
-      {
-        id: 4,
-        img: '../../images/index/index-logo.png',
-        number: '240421',
-        name: '水浒传',
-        dueTime: '2020年4月15日',
-        remainTime: '30天',
-      },
-    ],
+    bookArr: [],
     totalNumber: '10',
     expiredNumber: '5',
+    borrowCount: '', // 总借书
+    expiredCount: '', // 已到期
+    expiringCount: '', // 即将到期
+    totalCount: '',
   },
 
   // 退出登录
@@ -58,14 +30,29 @@ Page({
 
 
   getData() {
+    const that = this;
     const { id } = wx.getStorageSync('userInfo');
     wx.showLoading({
       title: '加载中...',
       mask: true,
     });
-    postRequest(`/borrow/getMyBooks`, { id }).then(res => {
+    getRequest(`/borrow/getBooksByUserId/${id}`).then(res => {
       wx.hideLoading();
       console.log(res);
+      const { data } = res;
+      if (data.status === 200) {
+        that.setData({
+          bookArr: data.data.books.map(item => ({
+            ...item,
+            borrowTime: formatDate(item.borrowTime),
+            deadline: formatDate(item.deadline),
+          })),
+          borrowCount: data.data.counts.borrowCount,
+          expiredCount: data.data.counts.expiredCount,
+          expiringCount: data.data.counts.expiringCount,
+          totalCount: data.data.counts.totalCount,
+        });
+      } 
     });
   },
 
