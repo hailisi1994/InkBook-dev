@@ -93,7 +93,7 @@ public class UserController {
         if (check.size()>0){
             return  ResponseEntity.okMap(check.get(0));
         }
-        return  ResponseEntity.errorMsg("登录失败!");
+        return  ResponseEntity.errorMsg("登录失败!检查用户密码是否正确!");
     }
 
 

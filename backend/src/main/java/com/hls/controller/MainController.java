@@ -44,7 +44,6 @@ public class MainController {
     public ResponseEntity scanBarcode(@RequestBody BarcodeDTO barcodeDTO){
         BookInfoDTO bookInfo = restTemplate.getForObject(ISBN_URL + barcodeDTO.getResult(), BookInfoDTO.class);
         assert bookInfo != null;
-       Object o = restTemplate.getForObject("https://book.douban.com/subject/3622904/", Object.class);
         String trim = bookInfo.getSummary().trim();
         String[] split = StringUtils.split(trim, "/");
         String s = JSON.toJSONString(bookInfo);

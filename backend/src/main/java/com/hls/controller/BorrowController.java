@@ -1,12 +1,15 @@
 package com.hls.controller;
 
+import com.hls.pojo.Book;
 import com.hls.pojo.Borrow;
+import com.hls.pojo.vo.ResponseEntity;
 import com.hls.service.BorrowService;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Borrow)表控制层
@@ -40,4 +43,21 @@ public class BorrowController {
         return this.borrowService.queryById(id);
     }
 
+
+    /**
+     * 根据用户id查询借书信息
+     *
+     * @param userId 用户主键
+     * @return 借书信息
+     */
+    @ApiOperation("根据用户id查询借书信息")
+    @GetMapping("/getBooksByUserId/{userId}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "", required = true, paramType = "query", dataType = "String", example = "0"),
+    })
+    public ResponseEntity getMyBooks(@PathVariable("userId") String userId) {
+
+//        List<Book> books = borrowService.getBooksByUserId(userId);
+        return new ResponseEntity();
+    }
 }
