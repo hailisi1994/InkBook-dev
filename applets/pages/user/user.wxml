@@ -1,2 +1,30 @@
 <!--pages/user/user.wxml-->
-<view>wode</view>
+<view class="user-info-inner">
+  <view class="user-info-wrap">
+    <view class="user-info">
+      <view class='avater-img'>
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class='username'><open-data type="userNickName"></open-data></view>
+    </view>
+    <view class="reback-login-btn" bindtap="logout">退出登录</view>
+  </view>
+  <view class="bg-padding"></view>
+  <view class="book-content">
+    <view wx:if="{{bookArr && bookArr.length}}">
+      <view class="book-tips">共有{{totalNumber}}本书，即将到期{{expiredNumber}}本书</view>
+      <view class="book-list">
+        <view class="book-item" wx:for="{{bookArr}}" wx:key>
+          <image mode='aspectFit' src="{{item.img}}" class="book-img" />
+          <view class="book-info">
+            <view class="book-text">书籍编号 {{item.number}}</view>
+            <view class="book-text">书籍名称 {{item.name}}</view>
+            <view class="book-text">到期时间 {{item.dueTime}}</view>
+            <view class="book-text">剩余天数 {{item.remainTime}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="no-content">暂无内容</view>
+  </view>
+</view>

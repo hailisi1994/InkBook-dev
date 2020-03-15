@@ -290,7 +290,7 @@ Page({
           wx.showLoading({
             title: '正在注册中...',
             mask: true,
-          })
+          });
           postRequest('/user/regist', params).then(
             (res) => {
               wx.hideLoading();
@@ -299,13 +299,10 @@ Page({
 
               };
               if (data.status === 200) {
-                wx.showToast({
-                  title: '注册成功，正在跳转...',
-                  icon: 'none',
-                  mask: true,
-                  duration: 1500,
-                });
                 wx.setStorageSync('userInfo', data.data);
+                wx.switchTab({
+                  url: '../user/user',
+                });
               } else {
                 wx.showToast({
                   title: data.msg,

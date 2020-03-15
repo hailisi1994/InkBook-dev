@@ -2,7 +2,7 @@
 <view class="inner">
   <view class="info-list">
     <view class="info-item">
-      <image class="r-icon" mode="aspectFit" src="../../images/login/login-user.png"></image>
+      <image class="r-icon" mode="aspectFit" src="../../images/login/login-phone.png"></image>
       <view class="r-content">
         <input class="weui-input" value="{{phone}}" type="text" placeholder="请输入手机号" bindinput="bindPhoneInput" />
       </view>
