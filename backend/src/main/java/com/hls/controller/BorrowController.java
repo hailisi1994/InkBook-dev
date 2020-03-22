@@ -8,7 +8,6 @@ import com.hls.service.BorrowService;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -69,7 +68,7 @@ public class BorrowController {
      * @return {@link Borrow}
      */
     @ApiOperation("添加借阅记录")
-    @PostMapping("/add")
+    @PostMapping("/save")
     @ApiImplicitParams({})
     public ResponseEntity add(@RequestBody Borrow borrow) {
         Borrow save = borrowService.insert(borrow);

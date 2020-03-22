@@ -1,12 +1,16 @@
 package com.hls.service.impl;
 
+import com.hls.dao.BookDao;
 import com.hls.dao.CustomDao;
+import com.hls.dao.UserDao;
+import com.hls.pojo.Book;
 import com.hls.pojo.Borrow;
 import com.hls.dao.BorrowDao;
 import com.hls.pojo.vo.BooksVO;
 import com.hls.pojo.vo.BorrowCountVO;
 import com.hls.pojo.vo.MineVO;
 import com.hls.service.BorrowService;
+import com.hls.service.UserService;
 import com.hls.utils.DateUtil;
 import org.springframework.stereotype.Service;
 
@@ -40,18 +44,6 @@ public class BorrowServiceImpl implements BorrowService {
         return this.borrowDao.selectByPrimaryKey(id);
     }
 
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    @Override
-    public List<Borrow> queryAllByLimit(int offset, int limit) {
-//        return this.borrowDao.queryAllByLimit(offset, limit);
-        return null;
-    }
 
     /**
      * 新增数据
