@@ -1,6 +1,7 @@
 package com.hls.controller;
 
 import com.hls.pojo.Book;
+import com.hls.pojo.dto.BookQueryDTO;
 import com.hls.pojo.vo.ResponseEntity;
 import com.hls.service.BookService;
 import org.springframework.web.bind.annotation.*;
@@ -43,12 +44,24 @@ public class BookController {
 
 
     @ApiOperation("保存图书信息")
-    @PostMapping("/add")
+    @PostMapping("/save")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "book", value = "", required = true, paramType = "save", dataType = "book"),
     })
     public ResponseEntity saveBook(@RequestBody Book book) {
-        return ResponseEntity.okMap(bookService.insert(book));
+        if (book.getId()==null) {
+            return ResponseEntity.okMap(bookService.insert(book));
+        }
+        return ResponseEntity.okMap(bookService.update(book));
+    }
+
+    @ApiOperation("查询图书列表")
+    @PostMapping("/list")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "book", value = "", required = true, paramType = "query", dataType = "book"),
+    })
+    public ResponseEntity list(@RequestBody BookQueryDTO bookQueryDTO) {
+        return ResponseEntity.okMap(bookService.list(bookQueryDTO));
     }
 
 }

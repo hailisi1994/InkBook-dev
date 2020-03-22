@@ -1,6 +1,8 @@
 package com.hls.service;
 
 import com.hls.pojo.Book;
+import com.hls.pojo.dto.BookQueryDTO;
+import com.hls.pojo.dto.BookResponseDTO;
 
 import java.util.List;
 
@@ -53,4 +55,11 @@ public interface BookService {
      */
     boolean deleteById(String id);
 
+    /**
+     * 列表
+     *
+     * @param bookQueryDTO 查询dto
+     * @return {@link List<Book>}
+     */
+    BookResponseDTO list(BookQueryDTO bookQueryDTO);
 }

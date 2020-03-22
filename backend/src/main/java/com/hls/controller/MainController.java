@@ -92,9 +92,7 @@ public class MainController {
     @PostMapping("/getOpenid")
     public String getOpenid(@RequestBody WxLoginDTO wxLoginDTO) {
         System.out.println(wxLoginDTO);
-        String string = restTemplate.getForObject(String.format(openidUrl, appid, secret, wxLoginDTO.getCode()), String.class);
-
-        return string;
+        return restTemplate.getForObject(String.format(openidUrl, appid, secret, wxLoginDTO.getCode()), String.class);
     }
 
 
