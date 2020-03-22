@@ -2,10 +2,19 @@ package com.hls.service.impl;
 
 import com.hls.dao.BookDao;
 import com.hls.pojo.Book;
+import com.hls.pojo.dto.BookQueryDTO;
+import com.hls.pojo.dto.BookResponseDTO;
+import com.hls.pojo.dto.Pagination;
 import com.hls.service.BookService;
+import com.hls.utils.BookUtil;
+import com.hls.utils.PaginationUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +35,7 @@ public class BookServiceImpl implements BookService {
      * @return 实例对象
      */
     @Override
-    public Book queryById(String id) {
+    public Book  queryById(String id) {
         return this.bookDao.selectByPrimaryKey(id);
     }
 
@@ -51,6 +60,11 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public Book insert(Book book) {
+        book.setId(BookUtil.getIdByCurrentTime());
+        book.setIfOn(1);
+        book.setSort("默认");
+        book.setCreateTime(new Date());
+        book.setUpdateTime(new Date());
         this.bookDao.insert(book);
         return book;
     }
@@ -76,5 +90,37 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean deleteById(String id) {
         return this.bookDao.deleteByPrimaryKey(id) > 0;
+    }
+
+    /**
+     * 列表
+     *
+     * @param bookQueryDTO 书
+     * @return {@link List<Book>}
+     */
+    @Override
+    public BookResponseDTO list(BookQueryDTO bookQueryDTO) {
+        Book book = bookQueryDTO.getBook();
+        Pagination pagination = bookQueryDTO.getPagination();
+        RowBounds rowBounds = PaginationUtil.createRowBoundsByPagination(pagination);
+        Example example = new Example(Book.class);
+        Example.Criteria criteria = example.createCriteria();
+        if (book!=null) {
+            if (StringUtils.isNotBlank(book.getSort())){
+                criteria.andEqualTo("sort",book.getSort());
+            }
+            if (StringUtils.isNotBlank(book.getAuthor())){
+                criteria.andLike("author",book.getAuthor());
+            }
+            if (StringUtils.isNotBlank(book.getTitle())){
+                criteria.andLike("title",book.getTitle());
+            }
+        }
+        example.orderBy("createTime").desc();
+        //查询总记录
+        int count = bookDao.selectCountByExample(example);
+        pagination.setTotal(count);
+        List<Book> bookList =  bookDao.selectByExampleAndRowBounds(example,rowBounds);
+        return new BookResponseDTO().setBookList(bookList).setPagination(pagination);
     }
 }
