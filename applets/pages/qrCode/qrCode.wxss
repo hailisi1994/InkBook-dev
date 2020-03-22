@@ -1,0 +1,8 @@
+/* pages/qrCode/qrCode.wxss */
+.canvas-inner {
+  padding: 40rpx 30rpx;
+}
+/* #myCanvas {
+  width: 100%;
+  height: 400rpx;
+} */

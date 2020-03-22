@@ -1,11 +1,15 @@
 {
   "pages": [
+    "pages/search/search",
+    "pages/bookDetails/bookDetails",
+    "pages/scan/scan",
     "pages/index/index",
     "pages/user/user",
     "pages/login/login",
     "pages/register/register",
     "pages/logs/logs",
-    "pages/bookCity/bookCity"
+    "pages/bookCity/bookCity",
+    "pages/qrCode/qrCode"
   ],
   "window": {
     "backgroundTextStyle": "light",

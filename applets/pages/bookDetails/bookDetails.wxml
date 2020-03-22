@@ -1,0 +1,60 @@
+<!--pages/bookDetails/bookDetails.wxml-->
+<!--scan.wxml-->
+<view class="details-inner">
+  <form class="scan-form" bindsubmit="formSubmit">
+    <!-- 显示的内容信息 -->
+    <view class="scan-info">
+      <view class="scan-item">
+        <input hidden type="text" name="coverUrl" placeholder="封面" value="{{bookData.coverUrl}}" />
+        <image class="cover" mode="aspectFit" src="{{bookData.coverUrl}}" />
+      </view>
+      <view class="scan-item">
+        <view class="title">书名:</view>
+        <view class="view-text">{{bookData.title}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">作者:</view>
+        <view class="view-text">{{bookData.author}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">分类:</view>
+        <view class="view-text">{{bookData.sort}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">出版社:</view>
+        <view class="view-text">{{bookData.pub}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">译者:</view>
+        <view class="view-text">{{bookData.translator}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">出版年:</view>
+        <view class="view-text">{{bookData.publication}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">页数:</view>
+        <view class="view-text">{{bookData.pages}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">定价:</view>
+        <view class="view-text">{{bookData.price}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">装帧:</view>
+        <view class="view-text">{{bookData.framing}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">丛书:</view>
+        <view class="view-text">{{bookData.series}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">ISBN:</view>
+        <view class="view-text">{{bookData.isbn}}</view>
+      </view>
+    </view>
+  </form>
+  <view class="borrow-btn">
+    <button size="default" type="primary" bindtap="borrow">扫码借阅</button>
+  </view>
+</view>

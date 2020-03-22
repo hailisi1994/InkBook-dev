@@ -1,24 +1,76 @@
 <!--scan.wxml-->
-<view>
-  <view>
-    <button bindtap='test'>测试后端连接</button>
+<view class="scan-inner">
+  <!-- 提示 -->
+  <view class="tips">
+    提示：请点击下方的扫描按钮进行图书录入操作，若录入信息有误，可修改提交
   </view>
-  <view>
-    <button type="default" bindtap='scanBarcode' primary loading="{{loading.status}}">{{loading.tips}}</button>
-  </view>
-  <view class="section__ctn">
-    <text>书名：{{book.title}}</text>
-  </view>
-  <view class="section__ctn">
-    <text>摘要：{{book.abstract}}</text>
-  </view>
-  <view class="section__ctn">
-    <text>豆瓣评分：{{book.rating.star_count}}星</text>
-  </view>
-  <view class="section__ctn">
-    <text>评分信息：{{book.rating.rating_info}}</text>
-  </view>
-  <view class="section__ctn">
-    <image style="width: 200px;height: 200px;background-color: #eeeeee;" mode="aspectFit" src="{{book.cover_url}}"></image>
+  <form class="scan-form" bindsubmit="formSubmit" hidden="{{!isShowInfo}}">
+    <!-- 显示的内容信息 -->
+    <view class="scan-info">
+      <view class="scan-item">
+        <input hidden type="text" name="coverUrl" placeholder="封面" value="{{bookData.coverUrl}}" />
+        <image class="cover" mode="aspectFit" src="{{bookData.coverUrl}}" />
+      </view>
+      <view class="scan-item">
+        <view class="title">书名:</view>
+        <input class="info-input left" type="text" name="title" placeholder="填写书名" value="{{bookData.title}}" bindinput="modifyTitle" />
+      </view>
+      <view class="scan-item">
+        <view class="title">作者:</view>
+        <input class="info-input left" type="text" name="author" placeholder="填写作者" value="{{bookData.author}}" bindinput="modifyAuthor" />
+      </view>
+      <view class="scan-item">
+        <view class="title">分类:</view>
+        <picker bindchange="bindPickerChange" value="{{sortIndex}}" range-key="value" range="{{sortArr}}">
+          <input class="left" type="text" name="sort" value="{{bookData.sort}}" placeholder="填写分类" hidden="{{bookData.sort}}" disabled />
+          <view class="info-input left" hidden="{{!bookData.sort}}">{{sortArr[sortIndex].value}}</view>
+        </picker>
+      </view>
+      <view class="scan-item">
+        <view class="title">出版社:</view>
+        <input class="info-input left" type="text" name="pub" placeholder="填写出版社" value="{{bookData.pub}}" bindinput="modifyPub" />
+      </view>
+      <view class="scan-item">
+        <view class="title">译者:</view>
+        <input class="info-input left" type="text" name="translator" placeholder="填写译者" value="{{bookData.translator}}" />
+      </view>
+      <view class="scan-item">
+        <view class="title">出版年:</view>
+        <input type="text" name="publication" placeholder="填写出版年" value="{{bookData.publication}}" disabled hidden />
+        <picker mode="date" end="{{endDate}}" value="{{bookData.publication}}" bindchange="modifyPublication">
+          <view class="info-input left">{{bookData.publication}}</view>
+        </picker>
+      </view>
+      <view class="scan-item">
+        <view class="title">页数:</view>
+        <input class="info-input left" type="text" name="pages" placeholder="填写页数" value="{{bookData.pages}}" bindinput="modifyPages" />
+      </view>
+      <view class="scan-item">
+        <view class="title">定价:</view>
+        <input class="info-input left" type="text" name="price" placeholder="填写定价" value="{{bookData.price}}" bindinput="modifyPrice" />
+      </view>
+      <view class="scan-item">
+        <view class="title">装帧:</view>
+        <input class="info-input left" type="text" name="framing" placeholder="填写装帧" value="{{bookData.framing}}" bindinput="modifyFraming" />
+      </view>
+      <view class="scan-item">
+        <view class="title">丛书:</view>
+        <input class="info-input left" type="text" name="series" placeholder="填写丛书" value="{{bookData.series}}" bindinput="modifySeries" />
+      </view>
+      <view class="scan-item">
+        <view class="title">ISBN:</view>
+        <input class="info-input left" type="text" name="isbn" placeholder="填写ISBN" value="{{bookData.isbn}}" bindinput="modifyISBN" />
+      </view>
+    </view>
+    <!-- 提交信息 -->
+    <view>
+      <button type="primary" formType="submit" primary>录入信息</button>
+    </view>
+  </form>
+  <!-- 点击扫描条形码 -->
+  <view class="scan-btn-inner" hidden="{{isShowInfo}}">
+    <button type="primary" size="default" bindtap='openScan' primary loading="{{scanLoading.status}}">
+      {{scanLoading.text}}
+    </button>
   </view>
 </view>

@@ -1,12 +1,6 @@
-.scan-inner {
+/* pages/bookDetails/bookDetails.wxss */
+.details-inner {
   padding: 30rpx;
-}
-.scan-btn-inner {
-  padding-top: 400rpx;
-}
-
-.scan-form .scan-info {
-  margin-bottom: 40rpx;
 }
 .scan-info .scan-item {
   display: flex;
@@ -22,24 +16,17 @@
   margin-right: 30rpx;
 }
 .scan-item .cover {
-  margin-top: 40rpx;
   width: 200px;
   height: 200px;
   background: #eeeeee;
 }
-.scan-item .info-input {
+.scan-item .view-text {
   flex: 0 0 auto;
   display: block;
   text-align: center;
   width: 420rpx;
   font-size: 36rpx;
 }
-.scan-item .left {
-  text-align: left;
-  border-bottom: 1rpx solid #eeeeee;
+.borrow-btn {
+  padding: 36px 0 30rpx 0;
 }
-
-
-
-
-

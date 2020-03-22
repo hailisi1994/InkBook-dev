@@ -1,0 +1,5 @@
+<!--pages/qrCode/qrCode.wxml-->
+<!-- 生成二维码的canvas -->
+<view class="canvas-inner">
+  <canvas type="2d" id="myCanvas"></canvas>
+</view>
