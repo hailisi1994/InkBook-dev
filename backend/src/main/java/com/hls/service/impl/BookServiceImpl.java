@@ -3,9 +3,11 @@ package com.hls.service.impl;
 import com.hls.dao.BookDao;
 import com.hls.pojo.Book;
 import com.hls.service.BookService;
+import com.hls.utils.BookUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +53,11 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public Book insert(Book book) {
+        book.setId(BookUtil.getIdByCurrentTime());
+        book.setIfOn(1);
+        book.setSort("默认");
+        book.setCreateTime(new Date());
+        book.setUpdateTime(new Date());
         this.bookDao.insert(book);
         return book;
     }

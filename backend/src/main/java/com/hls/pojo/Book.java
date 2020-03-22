@@ -1,5 +1,6 @@
 package com.hls.pojo;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.io.Serializable;
 import lombok.Data;
@@ -9,12 +10,12 @@ import javax.persistence.*;
  * (Book)实体类
  *
  * @author liangyehao
- * @since 2020-03-15 13:01:18
+ * @since 2020-03-21 22:22:07
  */
 @Table(name = "book")
 @Data
 public class Book implements Serializable {
-    private static final long serialVersionUID = 994604541821842982L;
+    private static final long serialVersionUID = -24008301568114054L;
     /**
     * 唯一书籍序号
     */
@@ -71,6 +72,41 @@ public class Book implements Serializable {
     */
     @Column(name = "cover_url")
     private String coverUrl;
+    /**
+    * 册数
+    */
+    @Column(name = "measure")
+    private String measure;
+    /**
+    * 装帧
+    */
+    @Column(name = "framing")
+    private String framing;
+    /**
+    * 系列
+    */
+    @Column(name = "series")
+    private String series;
+    /**
+    * 翻译者
+    */
+    @Column(name = "translator")
+    private String translator;
+    /**
+    * 价格
+    */
+    @Column(name = "price")
+    private Double price;
+    /**
+    * 页数
+    */
+    @Column(name = "pages")
+    private Integer pages;
+    /**
+    * 出版时间
+    */
+    @Column(name = "publication")
+    private LocalDateTime publication;
 
 
 }
