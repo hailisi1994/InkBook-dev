@@ -1,5 +1,5 @@
 // pages/qrCode/qrCode.js
-import drawQrcode from '../../utils/weapp.qrcode.esm.js'
+import drawQrcode from '../../utils/weapp.qrcode.esm.js'; // 适用于低于2.90版本使用
 
 Page({
 
@@ -7,51 +7,52 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    qrcode_w: 200,
   },
 
   // 生成二维码
-  // 将 dist 目录下，weapp.qrcode.esm.js 复制到项目目录中
-  getQrcode: function (canvasId, canvasText, ctx) {
-    drawQrcode({
-      width: 200,
-      height: 200,
-      canvasId,
-      // ctx,
-      // ctx: wx.createCanvasContext(canvasId),
-      text: canvasText,
-      // v1.0.0+版本支持在二维码上绘制图片
-      // image: {
-      //   imageResource: '../../images/icon.png',
-      //   dx: 70,
-      //   dy: 70,
-      //   dWidth: 60,
-      //   dHeight: 60
-      // },
-    });
+  getQrcode: function (canvasId, canvasText) {
+    const that= this;
+    let { qrcode_w } = that.data;
+    const query = wx.createSelectorQuery();
+    query.select('#canvas-inner').boundingClientRect(function (rect) {
+      qrcode_w = rect.width;
+      drawQrcode({
+        width: qrcode_w,
+        height: qrcode_w,
+        canvasId,
+        text: canvasText,
+        // ctx: wx.createCanvasContext(canvasId),
+        // v1.0.0+版本支持在二维码上绘制图片
+        // image: {
+        //   imageResource: '../../images/icon.png',
+        //   dx: 70,
+        //   dy: 70,
+        //   dWidth: 60,
+        //   dHeight: 60
+        // },
+      });
+      that.setData({
+        qrcode_w,
+      });
+    }).exec();
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const that = this;
     console.log('options', options);
-    const query = wx.createSelectorQuery();
-    query.select('#myCanvas')
-      .fields({ node: true, size: true })
-      .exec((res) => {
-        const canvas = res[0].node
-        const ctx = canvas.getContext('2d');
-        that.getQrcode('myCanvas', 'https://github.com/yingye', ctx);
-      });
+    const that = this;
+    const { userId, bookId, isbn } = options;
+    that.getQrcode('myCanvas', `${userId}@${bookId}@${isbn}`);
+    // that.getQrcode('myCanvas', `11121212121212`);
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**

@@ -1,5 +1,8 @@
 <!--pages/qrCode/qrCode.wxml-->
 <!-- 生成二维码的canvas -->
-<view class="canvas-inner">
-  <canvas type="2d" id="myCanvas"></canvas>
+<view id="canvas-inner">
+  <!-- 2.90版本以上 -->
+  <!-- <canvas type="2d" id="myCanvas"></canvas> -->
+  <!-- 低于2.90版本 -->
+  <canvas style="width: {{qrcode_w}}px; height: {{qrcode_w}}px" canvas-id="myCanvas"></canvas>
 </view>

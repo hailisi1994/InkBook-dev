@@ -24,7 +24,6 @@ Page({
       series: '暂无',
       sort: '1',
     },
-    bookId: '',
   },
 
   // 获取书籍内容数据
@@ -42,7 +41,6 @@ Page({
           ...res.data,
           publication: formatDate(res.data.publication),
         },
-        bookId: res.data.id,
       });
     });
   },
@@ -51,9 +49,10 @@ Page({
   borrow: function () {
     const userInfo = wx.getStorageSync('userInfo');
     const { id: userId } = userInfo;
-    const { bookId } = this.data;
+    const { bookData } = this.data;
+    const { id: bookId, isbn } = bookData;
     wx.navigateTo({
-      url: `../qrCode/qrCode?userId=${userId}&bookId=${bookId}`,
+      url: `../qrCode/qrCode?userId=${userId}&bookId=${bookId}&isbn=${isbn}`,
     })
   },
 
