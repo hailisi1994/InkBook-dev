@@ -1,5 +1,6 @@
 package com.hls.controller;
 
+import com.hls.dao.CustomDao;
 import com.hls.pojo.Book;
 import com.hls.pojo.Borrow;
 import com.hls.pojo.dto.BorrowInfoDTO;
@@ -83,11 +84,25 @@ public class BorrowController {
      * @param borrowInfo 扫描得到的信息
      * @return {@link ResponseEntity}
      */
-    @ApiOperation("添加借阅记录")
+    @ApiOperation("扫描得到的信息")
     @PostMapping("/scanBorrowInfo")
     @ApiImplicitParams({})
     public ResponseEntity scanBorrowInfo(@RequestBody BorrowInfoDTO borrowInfo) {
         BorrowInfoVo borrowInfoVo = borrowService.scanBorrowInfo(borrowInfo);
         return ResponseEntity.okMap(borrowInfoVo);
     }
+
+
+    /**
+     * 获取统计饼图数据
+     *
+     * @return {@link ResponseEntity}
+     */
+    @ApiOperation("添加借阅记录")
+    @GetMapping("/getPieChartData")
+    @ApiImplicitParams({})
+    public ResponseEntity getPieChartData() {
+        return ResponseEntity.okMap(borrowService.getPieChartData());
+    }
+
 }

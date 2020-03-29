@@ -6,6 +6,7 @@ import com.hls.pojo.vo.BorrowInfoVo;
 import com.hls.pojo.vo.MineVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Borrow)表服务接口
@@ -63,4 +64,11 @@ public interface BorrowService {
      * @return {@link BorrowInfoVo}
      */
     BorrowInfoVo scanBorrowInfo(BorrowInfoDTO borrowInfo);
+
+    /**
+     * 饼图数据
+     *
+     * @return {@link Map<String, Object>}
+     */
+    Map<String,Object> getPieChartData();
 }

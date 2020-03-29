@@ -1,6 +1,7 @@
 package com.hls.dao;
 
 import com.hls.pojo.vo.BooksVO;
+import com.hls.pojo.vo.ChartDataVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -22,4 +23,11 @@ public interface CustomDao {
      * @return {@link List<BooksVO>}
      */
     List<BooksVO> getBooksByUserId(@Param("userId") String userId);
+
+    /**
+     * 饼图数据
+     *
+     * @return {@link List<ChartDataVo>}
+     */
+    List<ChartDataVo> getPieChartData();
 }
