@@ -61,6 +61,10 @@
         <view class="title">ISBN:</view>
         <input class="info-input left" type="text" name="isbn" placeholder="填写ISBN" value="{{bookData.isbn}}" bindinput="modifyISBN" />
       </view>
+      <view class="scan-item">
+        <view class="title">存放位置:</view>
+        <input class="info-input left" type="text" name="location" placeholder="填写存放位置" value="{{bookData.location}}" bindinput="modifyLocation" />
+      </view>
     </view>
     <!-- 提交信息 -->
     <view>

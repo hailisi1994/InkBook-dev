@@ -1,13 +1,13 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/borrowDetails/borrowDetails",
     "pages/scan/scan",
     "pages/search/search",
     "pages/bookDetails/bookDetails",
-    "pages/index/index",
     "pages/user/user",
     "pages/login/login",
     "pages/register/register",
-    "pages/logs/logs",
     "pages/qrCode/qrCode",
     "pages/bookCity/bookCity"
   ],
@@ -24,12 +24,6 @@
         "text": "首页",
         "iconPath": "./images/tabBar/books_0.png",
         "selectedIconPath": "./images/tabBar/books_1.png"
-      },
-      {
-        "pagePath": "pages/bookCity/bookCity",
-        "text": "书城",
-        "iconPath": "./images/tabBar/forum_0.png",
-        "selectedIconPath": "./images/tabBar/forum_1.png"
       },
       {
         "pagePath": "pages/user/user",

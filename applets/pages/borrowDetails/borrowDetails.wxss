@@ -1,0 +1,44 @@
+/* pages/borrowDetails/borrowDetails.wxss */
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: #fff;
+}
+.details-inner {
+  padding: 30rpx;
+}
+.scan-info .scan-item {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+  font-size: 36rpx;
+}
+.scan-info .scan-item:last-child {
+  margin-bottom: 0;
+}
+.scan-item .title {
+  font-size: 36rpx;
+  margin-right: 30rpx;
+}
+.scan-item .cover {
+  width: 200px;
+  height: 200px;
+  background: #eeeeee;
+}
+.scan-item .view-text {
+  flex: 0 0 auto;
+  display: block;
+  text-align: center;
+  width: 420rpx;
+  font-size: 36rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.borrow-btn {
+  padding: 36px 0 30rpx 0;
+}

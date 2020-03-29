@@ -45,8 +45,12 @@ Page({
     console.log('options', options);
     const that = this;
     const { userId, bookId, isbn } = options;
-    that.getQrcode('myCanvas', `${userId}@${bookId}@${isbn}`);
-    // that.getQrcode('myCanvas', `11121212121212`);
+    that.getQrcode('myCanvas', `{
+      "userId": "${userId}",
+      "bookId": "${bookId}",
+      "isbn": "${isbn}",
+      "location": "${location ? '' : location}"
+    }`);
   },
 
   /**

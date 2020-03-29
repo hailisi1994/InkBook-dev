@@ -1,0 +1,36 @@
+<!--pages/borrowDetails/borrowDetails.wxml-->
+<view class="details-inner">
+  <view wx:if="{{loadingMask}}" class="loading-mask"></view>
+  <form class="scan-form" bindsubmit="formSubmit">
+    <!-- 显示的内容信息 -->
+    <view class="scan-info">
+      <view class="scan-item">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="scan-item">
+        <view class="title">借书人:</view>
+        <view class="view-text">{{userData.nickName}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">联系电话:</view>
+        <view class="view-text">{{userData.phone}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">书名:</view>
+        <view class="view-text">{{bookData.title}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">存放位置:</view>
+        <view class="view-text">{{bookData.location}}</view>
+      </view>
+      <view class="scan-item">
+        <view class="title">作者:</view>
+        <view class="view-text">{{bookData.author}}</view>
+      </view>
+    </view>
+  </form>
+  <view class="borrow-btn">
+    <button size="default" type="primary" bindtap="sureBorrow">确定借阅</button>
+  </view>
+</view>
+

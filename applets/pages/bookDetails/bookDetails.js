@@ -23,6 +23,7 @@ Page({
       framing: '暂无',
       series: '暂无',
       sort: '1',
+      location: '暂无',
     },
   },
 
@@ -50,9 +51,9 @@ Page({
     const userInfo = wx.getStorageSync('userInfo');
     const { id: userId } = userInfo;
     const { bookData } = this.data;
-    const { id: bookId, isbn } = bookData;
+    const { id: bookId, isbn, location } = bookData;
     wx.navigateTo({
-      url: `../qrCode/qrCode?userId=${userId}&bookId=${bookId}&isbn=${isbn}`,
+      url: `../qrCode/qrCode?userId=${userId}&bookId=${bookId}&isbn=${isbn}&location=${location}`,
     })
   },
 

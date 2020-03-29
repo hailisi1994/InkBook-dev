@@ -52,6 +52,11 @@
         <view class="title">ISBN:</view>
         <view class="view-text">{{bookData.isbn}}</view>
       </view>
+      <view class="scan-item">
+        <view class="title">存放位置:</view>
+        <view class="view-text">{{bookData.location}}</view>
+      </view>
+      
     </view>
   </form>
   <view class="borrow-btn">
