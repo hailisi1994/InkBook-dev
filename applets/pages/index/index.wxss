@@ -1,21 +1,126 @@
 /**index.wxss**/
-.userinfo {
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: #fff;
+}
+.index-inner {
+  width: 100%;
+}
+
+/* 学生页面样式----- */
+.sb-search {
+  padding: 0 30rpx;
+}
+
+.search-input {
   display: flex;
-  flex-direction: column;
   align-items: center;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.sort-wrap {
+  flex: 0 0 auto;
+  margin-right: 10rpx;
+}
+.search-wrap {
+  padding: 0 30rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+	background-color: #f5f7f6;
+	border-radius: 35rpx;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.search-wrap .search-up-icon {
+  width: 0;
+  height: 0;
+  border-top: 10rpx solid #666;
+  border-left: 10rpx solid transparent; 
+  border-right: 10rpx solid transparent;
+  border-bottom: none;
+  margin-left: 10rpx; 
+}
+.search-text-wrap {
+  flex: 1;
+  height: 70rpx;
+  padding: 0 30rpx;
+  line-height: 70rpx;
+	background-color: #f5f7f6;
+	border-radius: 35rpx;
+  overflow: hidden;
+}
+.search-text-wrap input {
+  width: 100%;
+  height: 100%;
+  line-height: 70rpx;
+}
+.search-info {
+  padding: 30rpx 0;
+}
+.search-list {
+  padding: 0 30rpx;
+}
+.search-list .search-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.search-list .search-item:last-child {
+  border-bottom: none;
+}
+.search-item .coverUrl {
+  width: 260rpx;
+  height: 260rpx;
+  display: block;
+  flex: 0 0 auto;
+  margin-right: 14rpx;
+}
+.search-item .info-wrap {
+  flex: 1;
+  overflow: hidden;
+  max-width: 100%;
+}
+.info-wrap .view-text {
+  font-size: 34rpx;
+  line-height: 50rpx;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.no_message {
+  width: 100%;
+  height: 300rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+}
+.loadStatus {
+  text-align: center;
+  height: 60rpx;
+  width: 100%;
+  line-height: 60rpx;
+  font-size: 30rpx;
+}
+/* 学生页面样式-- end --- */
+
+/* 老师页面样式----- */
+.admin-inner {
+  width: 100%;
+  margin-top: 100px;
+}
+.admin-inner .admin-item {
+  margin-bottom: 40rpx;
+}
+.admin-inner .admin-item:last-child {
+  margin-bottom: 0;
 }
 
-.usermotto {
-  margin-top: 200px;
-}
+/* 老师页面样式-- end --- */

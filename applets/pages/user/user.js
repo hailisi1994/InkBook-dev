@@ -10,6 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    loadingMask: true,
+    // role: 0用户 1管理员
+    role: 0,
     bookArr: [],
     totalNumber: '10',
     expiredNumber: '5',
@@ -28,7 +31,7 @@ Page({
     });
   },
 
-
+  // 获取学生的借阅书籍的记录
   getData() {
     const that = this;
     const { id } = wx.getStorageSync('userInfo');
@@ -60,10 +63,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const that = this;
     // 判断有没有登录过
     const userInfo = wx.getStorageSync('userInfo');
     if (userInfo) { // 有登录过
-      this.getData();
+      const { role } = userInfo;
+      // role: 0用户 1管理员
+      if (role === 0) {
+        that.getData();
+      }
+      that.setData({
+        role,
+        loadingMask: false,
+      });
     } else { // 退回登录页面
       wx.redirectTo({
         url: '../login/login',

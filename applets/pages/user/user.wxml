@@ -1,5 +1,6 @@
 <!--pages/user/user.wxml-->
 <view class="user-info-inner">
+  <view wx:if="{{loadingMask}}" class="loading-mask"></view>
   <view class="user-info-wrap">
     <view class="user-info">
       <view class='avater-img'>
@@ -11,29 +12,35 @@
   </view>
   <view class="bg-padding"></view>
   <view class="book-content">
-    <view wx:if="{{bookArr && bookArr.length}}">
-      <view class="book-tips">
-        <text wx:if="{{borrowCount > 0}}">共借有{{borrowCount}}本书</text>
-        <text wx:if="{{expiringCount > 0}}">，即将到期有{{expiringCount}}本书</text>
-        <text wx:if="{{expiredCount > 0}}">，到期有{{expiredCount}}本书</text>
-        </view>
-      <view class="book-list">
-        <view class="book-item" wx:for="{{bookArr}}" wx:key>
-          <image mode='aspectFit' src="{{item.coverUrl}}" class="book-img" />
-          <view class="book-info">
-            <view class="book-text">书籍编号 {{item.bookId}}</view>
-            <view class="book-text">书籍名称 {{item.title}}</view>
-            <view class="book-text">到期时间 {{item.deadline}}</view>
-            <view class="book-text" wx:if="{{item.leftDays < 0}}">
-              逾期天数 {{-item.leftDays}}
-            </view>
-            <view class="book-text" wx:else>
-              剩余天数 {{item.leftDays}}
+    <!-- 学生页面 -->
+    <view wx:if="{{role === 0}}">
+      <view wx:if="{{bookArr && bookArr.length}}">
+        <view class="book-tips">
+          <text wx:if="{{borrowCount > 0}}">共借有{{borrowCount}}本书</text>
+          <text wx:if="{{expiringCount > 0}}">，即将到期有{{expiringCount}}本书</text>
+          <text wx:if="{{expiredCount > 0}}">，到期有{{expiredCount}}本书</text>
+          </view>
+        <view class="book-list">
+          <view class="book-item" wx:for="{{bookArr}}" wx:key="bookId">
+            <image mode='aspectFit' src="{{item.coverUrl}}" class="book-img" />
+            <view class="book-info">
+              <view class="book-text">书籍编号 {{item.bookId}}</view>
+              <view class="book-text">书籍名称 {{item.title}}</view>
+              <view class="book-text">到期时间 {{item.deadline}}</view>
+              <view class="book-text" wx:if="{{item.leftDays < 0}}">
+                逾期天数 {{-item.leftDays}}
+              </view>
+              <view class="book-text" wx:else>
+                剩余天数 {{item.leftDays}}
+              </view>
             </view>
           </view>
         </view>
       </view>
+      <view wx:else class="no-content">暂无内容</view>
     </view>
-    <view wx:else class="no-content">暂无内容</view>
+    
+    <!-- 管理员页面 -->
+    <view wx:else>管理员页面</view>
   </view>
 </view>

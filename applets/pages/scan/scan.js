@@ -150,6 +150,17 @@ Page({
       },
     });
   },
+  
+  // 修改存放位置
+  modifyLocation: function(e) {
+    const { bookData } = this.data;
+    this.setData({
+      bookData: {
+        ...bookData,
+        location: e.detail.value,
+      },
+    });
+  },
 
   // 选择分类类型
   bindPickerChange: function (e) {
@@ -234,7 +245,7 @@ Page({
       mask: true,
     });
     postRequest('/book/save', params).then(res => {
-      // console.log('保存嘻嘻', res);
+      console.log('保存嘻嘻', res);
       wx.hideLoading();
       const { data } = res;
       if (data.status === 200) {
@@ -251,7 +262,7 @@ Page({
         });
       } else {
         wx.showToast({
-          title: data.msg,
+          title: data.error,
           icon: 'none',
           mask: true,
           duration: 1500,
@@ -266,7 +277,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
 
   /**
