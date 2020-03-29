@@ -61,6 +61,10 @@
 .search-info {
   padding: 30rpx 0;
 }
+.search-info .totalSizes {
+  font-size: 32rpx;
+  text-align: center;
+}
 .search-list {
   padding: 0 30rpx;
 }

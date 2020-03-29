@@ -59,6 +59,16 @@ Page({
     });
   },
 
+  // 点击跳转到详情页
+  jumpView: function (e) {
+    const { bookArr } = this.data;
+    const { id } = e.currentTarget.dataset;
+    // type: 1借书， 2还书
+    wx.navigateTo({
+      url: `../bookDetails/bookDetails?id=${id}&type=2`,
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

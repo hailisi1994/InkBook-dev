@@ -60,6 +60,7 @@
     </view>
   </form>
   <view class="borrow-btn">
-    <button size="default" type="primary" bindtap="borrow">扫码借阅</button>
+    <!-- 1借书， 2还书 -->
+    <button size="default" type="primary" bindtap="borrowOrReturn">{{borrowType === '1' ? '扫码借阅' : '扫码还书'}}</button>
   </view>
 </view>

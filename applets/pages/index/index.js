@@ -17,7 +17,7 @@ Page({
     // 学生的数据
     isLoading: true,
     curentPage: 1, // 当前页数
-    totalPage: 0, // 内容总条数
+    totalSizes: 0, // 内容总条数
     bookList: [],
     sortIndex: '0',
     sortArray: [
@@ -113,7 +113,7 @@ Page({
             publication: formatDate(item.publication),
           }))),
           curentPage: data.data.pagination.page,
-          totalPage: data.data.pagination.total,
+          totalSizes: data.data.pagination.total,
           isLoading: false,
         });
       }
@@ -162,8 +162,9 @@ Page({
   jumpView: function (e) {
     const { bookList } = this.data;
     const { id } = e.currentTarget.dataset;
+    // type: 1借书， 2还书
     wx.navigateTo({
-      url: `../bookDetails/bookDetails?id=${id}`,
+      url: `../bookDetails/bookDetails?id=${id}&type=1`,
     });
   },
   // 学生页面的事件----end
@@ -174,7 +175,7 @@ Page({
   //（管理员）扫描确认给学生借书
   borrowBook: function () {
     wx.navigateTo({
-      url: '../borrowDetails/borrowDetails',
+      url: '../borrowDetails/borrowDetails?borrowType=1',
     });
   },
 
@@ -185,10 +186,48 @@ Page({
     })
   },
 
+  //（管理员）扫描确认学生还书
+  returnBook: function () {
+    wx.navigateTo({
+      url: '../borrowDetails/borrowDetails?borrowType=2',
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log('onLoad', options);
+    // const that = this;
+    // // 判断有没有登录过
+    // const userInfo = wx.getStorageSync('userInfo');
+    // if (userInfo) { // 有登录过
+    //   const { role } = userInfo;
+    //   // role: 0用户 1管理员
+    //   if (role === 0) {
+    //     that.getData(true);
+    //   }
+    //   that.setData({
+    //     role,
+    //     loadingMask: false,
+    //   });
+    // } else { // 退回登录页面
+    //   wx.redirectTo({
+    //     url: '../login/login',
+    //   });
+    // }
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     const that = this;
     // 判断有没有登录过
     const userInfo = wx.getStorageSync('userInfo');
@@ -207,20 +246,6 @@ Page({
         url: '../login/login',
       });
     }
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
 
   /**
@@ -253,9 +278,9 @@ Page({
     const { role } = that.data;
     const userInfo = wx.getStorageSync('userInfo');
     if (userInfo && role === 0) {
-      const { bookList, totalPage, curentPage } = that.data;
+      const { bookList, totalSizes, curentPage } = that.data;
       // 判断是否数据全部加载完了
-      if (totalPage === bookList.length) return false;
+      if (totalSizes === bookList.length) return false;
       that.setData({
         isLoading: true,
         curentPage: curentPage + 1,

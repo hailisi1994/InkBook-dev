@@ -30,7 +30,8 @@
     </view>
   </form>
   <view class="borrow-btn">
-    <button size="default" type="primary" bindtap="sureBorrow">确定借阅</button>
+    <!-- 1借书， 2还书 -->
+    <button size="default" type="primary" bindtap="sureBorrowOrReturn">{{borrowType === '1' ? '确定借阅' : '确定还书'}}</button>
   </view>
 </view>
 

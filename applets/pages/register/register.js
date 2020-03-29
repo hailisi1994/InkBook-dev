@@ -301,7 +301,7 @@ Page({
               if (data.status === 200) {
                 wx.setStorageSync('userInfo', data.data);
                 wx.switchTab({
-                  url: '../user/user',
+                  url: '../index/index',
                 });
               } else {
                 wx.showToast({

@@ -21,7 +21,7 @@
           <text wx:if="{{expiredCount > 0}}">，到期有{{expiredCount}}本书</text>
           </view>
         <view class="book-list">
-          <view class="book-item" wx:for="{{bookArr}}" wx:key="bookId">
+          <view bindtap="jumpView" data-id="{{item.bookId}}" class="book-item" wx:for="{{bookArr}}" wx:key="bookId">
             <image mode='aspectFit' src="{{item.coverUrl}}" class="book-img" />
             <view class="book-info">
               <view class="book-text">书籍编号 {{item.bookId}}</view>
