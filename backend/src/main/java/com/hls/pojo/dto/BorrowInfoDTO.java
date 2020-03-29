@@ -10,6 +10,9 @@ import lombok.Data;
  */
 @Data
 public class BorrowInfoDTO {
+
+    private String borrowId;
+
     private String userId;
 
     private String bookId;

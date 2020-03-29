@@ -104,6 +104,7 @@ public class BookServiceImpl implements BookService {
         RowBounds rowBounds = PaginationUtil.createRowBoundsByPagination(pagination);
         Example example = new Example(Book.class);
         Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("ifOn",1);
         if (book!=null) {
             if (StringUtils.isNotBlank(book.getSort())){
                 criteria.andEqualTo("sort",book.getSort());

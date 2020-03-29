@@ -105,4 +105,19 @@ public class BorrowController {
         return ResponseEntity.okMap(borrowService.getPieChartData());
     }
 
+
+    /**
+     * 返回的书
+     *
+     * @param borrowInfo 借信息
+     * @return {@link ResponseEntity}
+     */
+    @ApiOperation("还书")
+    @PostMapping("/returnBook")
+    @ApiImplicitParams({})
+    public ResponseEntity returnBook(@RequestBody BorrowInfoDTO borrowInfo) {
+        borrowService.returnBook(borrowInfo);
+        return ResponseEntity.ok();
+    }
+
 }

@@ -11,6 +11,7 @@
     private Integer leftDays;
     -->
     <resultMap type="com.hls.pojo.vo.BooksVO" id="BooksVoMap">
+        <result property="borrowId" column="borrowId"/>
         <result property="bookId" column="bookId"/>
         <result property="title" column="title"/>
         <result property="coverUrl" column="coverUrl"/>
@@ -22,24 +23,26 @@
     <!--查询单个-->
     <select id="getBooksByUserId" resultMap="BooksVoMap">
         SELECT
-            bk.id AS bookId,
-            bk.title AS title,
-            bk.cover_url AS coverUrl,
-            brw.borrow_time AS borrowTime,
-            brw.deadline AS deadline,
-            ( SELECT ( datediff( brw.deadline, now( ) ) ) ) AS leftDays
+        bk.id AS bookId,
+        bk.title AS title,
+        bk.cover_url AS coverUrl,
+        brw.borrow_time AS borrowTime,
+        brw.id AS borrowId,
+        brw.deadline AS deadline,
+        ( SELECT ( datediff( brw.deadline, now( ) ) ) ) AS leftDays
         FROM
-            book bk
-                LEFT JOIN borrow brw ON brw.book_id = bk.id
+        book bk
+        LEFT JOIN borrow brw ON brw.book_id = bk.id
         WHERE
-            brw.user_id = #{userId}
-            order by leftDays asc
+        brw.if_return != 1 AND
+        brw.user_id = #{userId}
+        order by leftDays
     </select>
 
 
     <resultMap id="pieChartDataVoMap" type="com.hls.pojo.vo.ChartDataVo">
-        <result property="value" column="value"/>
-        <result property="name" column="name"/>
+        <result property="value" column="VALUE"/>
+        <result property="name" column="NAME"/>
     </resultMap>
 
     <select id="getPieChartData" resultMap="pieChartDataVoMap">

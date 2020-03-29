@@ -13,6 +13,7 @@ import java.util.Date;
 @Data
 public class BooksVO {
 
+    private String borrowId;
     private String bookId;
     private String title;
     private String coverUrl;
