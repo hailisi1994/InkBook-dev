@@ -1,9 +1,12 @@
 package com.hls.service;
 
 import com.hls.pojo.Borrow;
+import com.hls.pojo.dto.BorrowInfoDTO;
+import com.hls.pojo.vo.BorrowInfoVo;
 import com.hls.pojo.vo.MineVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Borrow)表服务接口
@@ -53,4 +56,19 @@ public interface BorrowService {
      * @return {@link MineVO}
      */
     MineVO getBooksByUserId(String userId);
+
+    /**
+     * 扫描借阅信息
+     *
+     * @param borrowInfo 借信息
+     * @return {@link BorrowInfoVo}
+     */
+    BorrowInfoVo scanBorrowInfo(BorrowInfoDTO borrowInfo);
+
+    /**
+     * 饼图数据
+     *
+     * @return {@link Map<String, Object>}
+     */
+    Map<String,Object> getPieChartData();
 }

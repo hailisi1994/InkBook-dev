@@ -10,9 +10,27 @@ import java.util.Date;
  * @content
  */
 public class BookUtil {
+    /**
+     * 根据当前时间获取Id
+     *
+     * @return {@link String}
+     */
     public static String getIdByCurrentTime(){
         String format = "yyyyMMddHHmmssSSS";
         return new SimpleDateFormat(format) .format(new Date() );
+    }
+
+    /**
+     * 条件like处理
+     *
+     * @param condition 条件
+     * @return {@link String}
+     */
+    public static String conditionLike(String condition){
+        if (condition==null) {
+            condition = "";
+        }
+        return  "%"+condition+"%";
     }
 
     public static void main(String[] args) {

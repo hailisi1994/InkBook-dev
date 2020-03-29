@@ -62,7 +62,6 @@ public class BookServiceImpl implements BookService {
     public Book insert(Book book) {
         book.setId(BookUtil.getIdByCurrentTime());
         book.setIfOn(1);
-        book.setSort("默认");
         book.setCreateTime(new Date());
         book.setUpdateTime(new Date());
         this.bookDao.insert(book);
@@ -110,10 +109,10 @@ public class BookServiceImpl implements BookService {
                 criteria.andEqualTo("sort",book.getSort());
             }
             if (StringUtils.isNotBlank(book.getAuthor())){
-                criteria.andLike("author",book.getAuthor());
+                criteria.andLike("author",BookUtil.conditionLike(book.getAuthor()));
             }
             if (StringUtils.isNotBlank(book.getTitle())){
-                criteria.andLike("title",book.getTitle());
+                criteria.andLike("title",BookUtil.conditionLike(book.getTitle()));
             }
         }
         example.orderBy("createTime").desc();
@@ -123,4 +122,6 @@ public class BookServiceImpl implements BookService {
         List<Book> bookList =  bookDao.selectByExampleAndRowBounds(example,rowBounds);
         return new BookResponseDTO().setBookList(bookList).setPagination(pagination);
     }
+
+
 }

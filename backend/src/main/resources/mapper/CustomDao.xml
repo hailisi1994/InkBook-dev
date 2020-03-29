@@ -36,4 +36,23 @@
             order by leftDays asc
     </select>
 
+
+    <resultMap id="pieChartDataVoMap" type="com.hls.pojo.vo.ChartDataVo">
+        <result property="value" column="value"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="getPieChartData" resultMap="pieChartDataVoMap">
+        SELECT
+            count( b.sort ) AS VALUE ,
+            ( SELECT d.VALUE FROM dict d WHERE b.sort = d.CODE AND kind = 'sort' ) AS NAME
+        FROM
+            borrow br
+                LEFT JOIN book b ON br.book_id = b.id
+        GROUP BY
+            b.sort
+        ORDER BY
+            b.sort;
+    </select>
+
 </mapper>
