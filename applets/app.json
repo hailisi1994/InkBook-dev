@@ -8,10 +8,8 @@
     "pages/user/user",
     "pages/login/login",
     "pages/register/register",
-    "pages/logs/logs",
     "pages/qrCode/qrCode",
-    "pages/bookCity/bookCity",
-    "pages/admin/admin"
+    "pages/bookCity/bookCity"
   ],
   "window": {
     "backgroundTextStyle": "light",
