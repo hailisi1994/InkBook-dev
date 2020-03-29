@@ -33,6 +33,7 @@
       <!-- 搜索到的内容 -->
       <view class="search-info">
         <view wx:if="{{bookList.length}}">
+          <view wx:if="{{totalSizes > 0}}" class="totalSizes">共有{{totalSizes}}条结果</view>
           <view class="search-list">
             <view data-id="{{item.id}}" class="search-item" bindtap="jumpView" wx:for="{{bookList}}" wx:key="id">
               <image class="coverUrl" src="{{item.coverUrl}}" mode="aspectFit"></image>

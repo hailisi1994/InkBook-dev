@@ -4,3 +4,8 @@
   padding: 60rpx 0;
   margin: 0 auto;
 }
+.tips {
+  padding-top: 40rpx;
+  font-size: 32rpx;
+  text-align: center;
+}

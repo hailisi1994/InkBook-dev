@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    borrowType: '1', // 1借书， 2还书
     bookData: {
       title: '暂无',
       author: '暂无',
@@ -46,15 +47,24 @@ Page({
     });
   },
 
-  // 点击借阅
-  borrow: function () {
+  // 点击借阅或者还书
+  borrowOrReturn: function () {
     const userInfo = wx.getStorageSync('userInfo');
     const { id: userId } = userInfo;
-    const { bookData } = this.data;
-    const { id: bookId, isbn, location } = bookData;
-    wx.navigateTo({
-      url: `../qrCode/qrCode?userId=${userId}&bookId=${bookId}&isbn=${isbn}&location=${location}`,
-    })
+    const { bookData, borrowType } = this.data;
+    const { id: bookId } = bookData;
+    // 1借书， 2还书
+    if (borrowType === '1') {
+      wx.navigateTo({
+        url: `../qrCode/qrCode?userId=${userId}&bookId=${bookId}&type=1`,
+      });
+    } else {
+      const { borrowId } = bookData;
+      wx.navigateTo({
+        url: `../qrCode/qrCode?borrowId=${borrowId}&type=2`,
+      });
+    }
+    
   },
 
   /**
@@ -63,7 +73,10 @@ Page({
   onLoad: function (options) {
     console.log('options', options);
     // 20200322140807768
-    const { id } = options;
+    const { id, type } = options;
+    this.setData({
+      borrowType: type,
+    });
     this.getData(id);
   },
 

@@ -44,13 +44,21 @@ Page({
   onLoad: function (options) {
     console.log('options', options);
     const that = this;
-    const { userId, bookId, isbn } = options;
-    that.getQrcode('myCanvas', `{
+    const { type } = options;
+    // 1借书， 2还书
+    if (type === '1') {
+      const { userId, bookId } = options;
+      that.getQrcode('myCanvas', `{
       "userId": "${userId}",
-      "bookId": "${bookId}",
-      "isbn": "${isbn}",
-      "location": "${location ? '' : location}"
+      "bookId": "${bookId}"
     }`);
+    } else {
+      const { borrowId } = options;
+      that.getQrcode('myCanvas', `{
+      "borrowId": "${borrowId}"
+    }`);
+    }
+    
   },
 
   /**

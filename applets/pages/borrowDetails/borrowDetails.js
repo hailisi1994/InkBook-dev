@@ -8,6 +8,7 @@ Page({
    */
   data: {
     loadingMask: true,
+    borrowType: '1', // 1借书， 2还书
     bookData: {
       id: "20200328210821125",
       isbn: "9787535421036",
@@ -50,13 +51,8 @@ Page({
       scanType: ['barCode', 'qrCode', 'datamatrix', 'pdf417'],
       success(res) {
         console.log('res', res.result);
-        const obj = JSON.parse(res.result);
-        console.log('obj', obj);
-        const { userId, bookId } = obj;
-        const params = {
-          userId,
-          bookId,
-        };
+        const params = JSON.parse(res.result);
+        console.log('params', params);
         // console.log('params', params);
         //扫码获取图书信息
         postRequest('/borrow/scanBorrowInfo', params).then(res1 => {
@@ -78,32 +74,51 @@ Page({
     });
   },
 
-  sureBorrow: function () {
+  // 确定借书或者还书
+  sureBorrowOrReturn: function () {
     const that = this;
-    const { bookData, userData } = that.data;
-    const { id: bookId } = bookData;
+    const { bookData, userData, borrowType } = that.data;
+    const { id: bookId, borrowId } = bookData;
     const { id: userId } = userData;
-    const params = {
-      userId,
-      bookId,
-    };
     wx.showLoading({
       title: '加载中...',
       mask: true,
     });
-    postRequest('/borrow/save', params).then(res => {
-      wx.hideLoading();
-      console.log('res', res);
-      if (res.data.status === 200) {
-        wx.showToast({
-          title: '已借阅',
-          mask: 'true',
-          icon: 'success',
-          duration: 1500,
-        });
-        // that.setData({});
-      }
-    });
+    if (borrowType === '1') {
+      const params = {
+        userId,
+        bookId,
+      };
+      postRequest('/borrow/save', params).then(res => {
+        wx.hideLoading();
+        console.log('res', res);
+        if (res.data.status === 200) {
+          wx.showToast({
+            title: '已借阅',
+            mask: 'true',
+            icon: 'success',
+            duration: 1500,
+          });
+          // that.setData({});
+        }
+      });
+    } else {
+      const params = {
+        borrowId,
+      };
+      postRequest('/borrow/returnBook', params).then(res => {
+        wx.hideLoading();
+        console.log('res', res);
+        if (res.data.status === 200) {
+          wx.showToast({
+            title: '已归还',
+            mask: 'true',
+            icon: 'success',
+            duration: 1500,
+          });
+        }
+      });
+    }
   },
 
   /**
@@ -111,6 +126,10 @@ Page({
    */
   onLoad: function (options) {
     console.log('options', options);
+    const { borrowType } = options;
+    this.setData({
+      borrowType, // 1借书， 2还书
+    });
     this.openScan();
   },
 

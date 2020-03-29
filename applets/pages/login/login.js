@@ -67,7 +67,7 @@ Page({
             duration: 1500,
           });
           wx.switchTab({
-            url: '../user/user',
+            url: '../index/index',
           });
         } else {
           wx.showToast({

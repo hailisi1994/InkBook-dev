@@ -5,4 +5,5 @@
   <!-- <canvas type="2d" id="myCanvas"></canvas> -->
   <!-- 低于2.90版本 -->
   <canvas style="width: {{qrcode_w}}px; height: {{qrcode_w}}px" canvas-id="myCanvas"></canvas>
+  <view class="tips">请将此二维码出示给图书管理员</view>
 </view>
