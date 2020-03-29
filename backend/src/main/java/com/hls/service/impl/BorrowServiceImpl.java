@@ -14,6 +14,8 @@ import com.hls.service.BorrowService;
 import com.hls.service.UserService;
 import com.hls.utils.DateUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -57,7 +59,13 @@ public class BorrowServiceImpl implements BorrowService {
      * @return 实例对象
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Borrow insert(Borrow borrow) {
+        //1.更新book信息
+        Book book = bookDao.selectByPrimaryKey(borrow.getBookId());
+        book.setIfOn(0);
+        bookDao.updateByPrimaryKey(book);
+        //2.插入borrow记录
         borrow.setId(UUID.randomUUID().toString());
         borrow.setBorrowTime(new Date());
         borrow.setIfReturn(0);
@@ -148,5 +156,26 @@ public class BorrowServiceImpl implements BorrowService {
         result.put("pieChartData",pieChartData);
         return result;
     }
+
+    /**
+     * 返回的书
+     *
+     * @param borrowInfo 借信息
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class )
+    public void returnBook(BorrowInfoDTO borrowInfo) {
+        //1.更新borrow表
+        Borrow borrow = borrowDao.selectByPrimaryKey(new Borrow().setId(borrowInfo.getBorrowId()));
+        borrow.setReturnTime(new Date());
+        borrow.setIfReturn(1);
+        borrowDao.updateByPrimaryKey(borrow);
+
+        //更新book表
+        Book book = bookDao.selectByPrimaryKey(borrow.getBookId());
+        book.setIfOn(1);
+        bookDao.updateByPrimaryKey(book);
+    }
+
 
 }

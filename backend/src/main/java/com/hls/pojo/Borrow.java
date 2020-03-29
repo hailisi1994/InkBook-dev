@@ -3,6 +3,8 @@ package com.hls.pojo;
 import java.util.Date;
 import java.io.Serializable;
 import lombok.Data;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
 
 /**
@@ -13,6 +15,7 @@ import javax.persistence.*;
  */
 @Table(name = "borrow")
 @Data
+@Accessors(chain = true)
 public class Borrow implements Serializable {
     private static final long serialVersionUID = 959556185142287769L;
     /**

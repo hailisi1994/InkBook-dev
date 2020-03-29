@@ -71,4 +71,11 @@ public interface BorrowService {
      * @return {@link Map<String, Object>}
      */
     Map<String,Object> getPieChartData();
+
+    /**
+     * 返回的书
+     *
+     * @param borrowInfo 借信息
+     */
+    void returnBook(BorrowInfoDTO borrowInfo);
 }
