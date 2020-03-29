@@ -4,9 +4,9 @@
   <view class="user-info-wrap">
     <view class="user-info">
       <view class='avater-img'>
-        <open-data type="userAvatarUrl"></open-data>
+        <image mode="aspectFit" src="{{userInfo.avatarUrl}}" />
       </view>
-      <view class='username'><open-data type="userNickName"></open-data></view>
+      <view class='username'>{{userInfo.nickName}}</view>
     </view>
     <view class="reback-login-btn" bindtap="logout">退出登录</view>
   </view>

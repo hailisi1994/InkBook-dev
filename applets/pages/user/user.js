@@ -20,6 +20,7 @@ Page({
     expiredCount: '', // 已到期
     expiringCount: '', // 即将到期
     totalCount: '',
+    userInfo: {},
   },
 
   // 退出登录
@@ -85,6 +86,7 @@ Page({
       that.setData({
         role,
         loadingMask: false,
+        userInfo,
       });
     } else { // 退回登录页面
       wx.redirectTo({
