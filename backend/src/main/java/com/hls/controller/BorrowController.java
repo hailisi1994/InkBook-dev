@@ -2,6 +2,8 @@ package com.hls.controller;
 
 import com.hls.pojo.Book;
 import com.hls.pojo.Borrow;
+import com.hls.pojo.dto.BorrowInfoDTO;
+import com.hls.pojo.vo.BorrowInfoVo;
 import com.hls.pojo.vo.MineVO;
 import com.hls.pojo.vo.ResponseEntity;
 import com.hls.service.BorrowService;
@@ -73,5 +75,19 @@ public class BorrowController {
     public ResponseEntity add(@RequestBody Borrow borrow) {
         Borrow save = borrowService.insert(borrow);
         return ResponseEntity.okMap(save);
+    }
+
+    /**
+     * 扫描借信息
+     *
+     * @param borrowInfo 扫描得到的信息
+     * @return {@link ResponseEntity}
+     */
+    @ApiOperation("添加借阅记录")
+    @PostMapping("/scanBorrowInfo")
+    @ApiImplicitParams({})
+    public ResponseEntity scanBorrowInfo(@RequestBody BorrowInfoDTO borrowInfo) {
+        BorrowInfoVo borrowInfoVo = borrowService.scanBorrowInfo(borrowInfo);
+        return ResponseEntity.okMap(borrowInfoVo);
     }
 }

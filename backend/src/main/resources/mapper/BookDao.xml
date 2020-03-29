@@ -21,6 +21,7 @@
         <result property="price" column="price" jdbcType="NUMERIC"/>
         <result property="pages" column="pages" jdbcType="INTEGER"/>
         <result property="publication" column="publication" jdbcType="TIMESTAMP"/>
+        <result property="location" column="location" jdbcType="VARCHAR"/>
     </resultMap>
 
 </mapper>

@@ -102,11 +102,17 @@ public class Book implements Serializable {
     */
     @Column(name = "pages")
     private Integer pages;
+
     /**
     * 出版时间
     */
     @Column(name = "publication")
     private LocalDateTime publication;
 
+    /**
+     * 位置
+     */
+    @Column(name = "location")
+    private String location;
 
 }

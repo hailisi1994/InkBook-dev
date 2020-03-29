@@ -1,6 +1,8 @@
 package com.hls.service;
 
 import com.hls.pojo.Borrow;
+import com.hls.pojo.dto.BorrowInfoDTO;
+import com.hls.pojo.vo.BorrowInfoVo;
 import com.hls.pojo.vo.MineVO;
 
 import java.util.List;
@@ -53,4 +55,12 @@ public interface BorrowService {
      * @return {@link MineVO}
      */
     MineVO getBooksByUserId(String userId);
+
+    /**
+     * 扫描借阅信息
+     *
+     * @param borrowInfo 借信息
+     * @return {@link BorrowInfoVo}
+     */
+    BorrowInfoVo scanBorrowInfo(BorrowInfoDTO borrowInfo);
 }

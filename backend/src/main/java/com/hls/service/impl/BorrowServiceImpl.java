@@ -6,9 +6,13 @@ import com.hls.dao.UserDao;
 import com.hls.pojo.Book;
 import com.hls.pojo.Borrow;
 import com.hls.dao.BorrowDao;
+import com.hls.pojo.User;
+import com.hls.pojo.dto.BorrowInfoDTO;
 import com.hls.pojo.vo.BooksVO;
 import com.hls.pojo.vo.BorrowCountVO;
+import com.hls.pojo.vo.BorrowInfoVo;
 import com.hls.pojo.vo.MineVO;
+import com.hls.service.BookService;
 import com.hls.service.BorrowService;
 import com.hls.service.UserService;
 import com.hls.utils.DateUtil;
@@ -32,6 +36,12 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Resource
     private CustomDao customDao;
+
+    @Resource
+    private BookDao bookDao;
+
+    @Resource
+    private UserDao userDao;
 
     /**
      * 通过ID查询单条数据
@@ -111,6 +121,19 @@ public class BorrowServiceImpl implements BorrowService {
         mineVO.setBooks(books);
         mineVO.setCounts(counts);
         return mineVO;
+    }
+
+    /**
+     * 扫描借阅信息
+     *
+     * @param borrowInfo 借信息
+     * @return {@link BorrowInfoVo}
+     */
+    @Override
+    public BorrowInfoVo scanBorrowInfo(BorrowInfoDTO borrowInfo) {
+        Book book = bookDao.selectByPrimaryKey(borrowInfo.getBookId());
+        User user = userDao.selectByPrimaryKey(borrowInfo.getUserId());
+        return new BorrowInfoVo().setBook(book).setUser(user);
     }
 
 }

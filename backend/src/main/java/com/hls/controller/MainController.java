@@ -65,7 +65,14 @@ public class MainController {
             book.setTranslator(bookMap.get("译者"));
 
             if (StringUtils.isNotBlank(bookMap.get("定价"))) {
-                book.setPrice(Double.parseDouble(bookMap.get("定价")));
+                try {
+                    String priceStr = bookMap.get("定价").replace("元","");
+                    double price = Double.parseDouble(priceStr);
+                    book.setPrice(price);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    book.setPrice(0d);
+                }
             }
             if (StringUtils.isNotBlank(bookMap.get("出版年"))) {
                 String publication = bookMap.get("出版年");
