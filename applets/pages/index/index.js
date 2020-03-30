@@ -164,7 +164,7 @@ Page({
     const { id } = e.currentTarget.dataset;
     // type: 1借书， 2还书
     wx.navigateTo({
-      url: `../bookDetails/bookDetails?id=${id}&type=1`,
+      url: `../bookDetails/bookDetails?bookId=${id}&type=1`,
     });
   },
   // 学生页面的事件----end
