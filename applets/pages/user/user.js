@@ -63,10 +63,10 @@ Page({
   // 点击跳转到详情页
   jumpView: function (e) {
     const { bookArr } = this.data;
-    const { id } = e.currentTarget.dataset;
+    const { bookid, borrowid } = e.currentTarget.dataset;
     // type: 1借书， 2还书
     wx.navigateTo({
-      url: `../bookDetails/bookDetails?id=${id}&type=2`,
+      url: `../bookDetails/bookDetails?borrowId=${borrowid}&bookId=${bookid}&type=2`,
     });
   },
 

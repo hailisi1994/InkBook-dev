@@ -11,6 +11,7 @@ Page({
    */
   data: {
     borrowType: '1', // 1借书， 2还书
+    borrowId: '',
     bookData: {
       title: '暂无',
       author: '暂无',
@@ -51,7 +52,7 @@ Page({
   borrowOrReturn: function () {
     const userInfo = wx.getStorageSync('userInfo');
     const { id: userId } = userInfo;
-    const { bookData, borrowType } = this.data;
+    const { bookData, borrowType, borrowId } = this.data;
     const { id: bookId } = bookData;
     // 1借书， 2还书
     if (borrowType === '1') {
@@ -59,7 +60,6 @@ Page({
         url: `../qrCode/qrCode?userId=${userId}&bookId=${bookId}&type=1`,
       });
     } else {
-      const { borrowId } = bookData;
       wx.navigateTo({
         url: `../qrCode/qrCode?borrowId=${borrowId}&type=2`,
       });
@@ -73,11 +73,12 @@ Page({
   onLoad: function (options) {
     console.log('options', options);
     // 20200322140807768
-    const { id, type } = options;
+    const { bookId, type, borrowId } = options;
     this.setData({
       borrowType: type,
+      borrowId,
     });
-    this.getData(id);
+    this.getData(bookId);
   },
 
   /**

@@ -55,8 +55,8 @@ Page({
     } else {
       const { borrowId } = options;
       that.getQrcode('myCanvas', `{
-      "borrowId": "${borrowId}"
-    }`);
+        "borrowId": "${borrowId}"
+      }`);
     }
     
   },

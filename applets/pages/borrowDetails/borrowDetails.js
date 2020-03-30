@@ -78,13 +78,13 @@ Page({
   sureBorrowOrReturn: function () {
     const that = this;
     const { bookData, userData, borrowType } = that.data;
-    const { id: bookId, borrowId } = bookData;
-    const { id: userId } = userData;
     wx.showLoading({
       title: '加载中...',
       mask: true,
     });
     if (borrowType === '1') {
+      const { id: bookId } = bookData;
+      const { id: userId } = userData;
       const params = {
         userId,
         bookId,
@@ -103,6 +103,7 @@ Page({
         }
       });
     } else {
+      const { borrowId } = bookData;
       const params = {
         borrowId,
       };
@@ -127,6 +128,9 @@ Page({
   onLoad: function (options) {
     console.log('options', options);
     const { borrowType } = options;
+    wx.setNavigationBarTitle({
+      title: borrowType === '1' ? '借书详情' : '还书详情',
+    })
     this.setData({
       borrowType, // 1借书， 2还书
     });
