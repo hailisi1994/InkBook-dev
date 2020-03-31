@@ -53,7 +53,7 @@ Page({
   // 确定借书或者还书
   sureBorrowOrReturn: function () {
     const that = this;
-    const { bookData, userData, borrowType } = that.data;
+    const { bookData, userData, borrowData, borrowType } = that.data;
     wx.showLoading({
       title: '加载中...',
       mask: true,
