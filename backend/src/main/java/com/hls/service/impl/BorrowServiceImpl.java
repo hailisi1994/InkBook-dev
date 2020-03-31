@@ -134,9 +134,10 @@ public class BorrowServiceImpl implements BorrowService {
      */
     @Override
     public BorrowInfoVo scanBorrowInfo(BorrowInfoDTO borrowInfo) {
-        Book book = bookDao.selectByPrimaryKey(borrowInfo.getBookId());
-        User user = userDao.selectByPrimaryKey(borrowInfo.getUserId());
-        return new BorrowInfoVo().setBook(book).setUser(user);
+        Borrow borrow = borrowDao.selectByPrimaryKey(borrowInfo.getBorrowId());
+        Book book = bookDao.selectByPrimaryKey(borrow.getBookId());
+        User user = userDao.selectByPrimaryKey(borrow.getUserId());
+        return new BorrowInfoVo().setBook(book).setUser(user).setBorrow(borrow);
     }
 
     /**
