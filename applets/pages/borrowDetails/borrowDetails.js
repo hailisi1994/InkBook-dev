@@ -9,39 +9,9 @@ Page({
   data: {
     loadingMask: true,
     borrowType: '1', // 1借书， 2还书
-    bookData: {
-      id: "20200328210821125",
-      isbn: "9787535421036",
-      title: "乾隆皇帝（全六册）",
-      author: "二月河",
-      pub: "长江文艺出版社",
-      ifOn: 1,
-      sort: "4",
-      createTime: "2020-03-28T13:08:21.000+0000",
-      updateTime: "2020-03-28T13:08:21.000+0000",
-      doubanUrl: "https://book.douban.com/subject/1095889/",
-      coverUrl: "https://img9.doubanio.com/view/subject/l/public/s9076791.jpg",
-      framing: "平装",
-      series: "",
-      translator: "",
-      price: 144.0,
-      pages: 3392,
-      publication: "2001-02-01T00:00:00",
-    },
-    userData: {
-      id: "b95e4cb8-6f41-448e-9d10-448cae3aae93",
-      name: "yehao",
-      nickName: "คิดถึง",
-      age: 11,
-      pro: "3",
-      grade: "4",
-      gender: "1",
-      phone: "13119583082",
-      integrity: 10,
-      avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKqNeRAvXmbmG23wUwYfxWRGEMIprxg5Q5vfudzzojWm2DrVrxTYXScoHyvs3yfRGt5QFibwHvSuLg/132",
-      password: "123456",
-      role: 0,
-    },
+    bookData: {},
+    userData: {},
+    borrowData: {},
   },
 
   // 点击扫描(学生的二维码)
@@ -58,6 +28,12 @@ Page({
         postRequest('/borrow/scanBorrowInfo', params).then(res1 => {
           console.log('res1', res1);
           if (res1.data.status === 200) {
+            if (that.data.borrowType === '2') {
+              const { borrow } = res1.data.data;
+              that.setData({
+                borrowData: { ...borrow },
+              });
+            }
             const { user, book } = res1.data.data;
             that.setData({
               bookData: { ...book },
@@ -103,9 +79,9 @@ Page({
         }
       });
     } else {
-      const { borrowId } = bookData;
+      const { id } = borrowData;
       const params = {
-        borrowId,
+        borrowId: id,
       };
       postRequest('/borrow/returnBook', params).then(res => {
         wx.hideLoading();
@@ -126,15 +102,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const that = this;
     console.log('options', options);
     const { borrowType } = options;
     wx.setNavigationBarTitle({
       title: borrowType === '1' ? '借书详情' : '还书详情',
     })
-    this.setData({
+    that.setData({
       borrowType, // 1借书， 2还书
+    }, () => {
+      that.openScan();
     });
-    this.openScan();
   },
 
   /**
