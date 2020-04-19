@@ -1,7 +1,7 @@
 <!--pages/bookDetails/bookDetails.wxml-->
 <!--scan.wxml-->
 <view class="details-inner">
-  <form class="scan-form" bindsubmit="formSubmit">
+  <form class="scan-form">
     <!-- 显示的内容信息 -->
     <view class="scan-info">
       <view class="scan-item">
@@ -10,57 +10,70 @@
       </view>
       <view class="scan-item">
         <view class="title">书名:</view>
-        <view class="view-text">{{bookData.title}}</view>
+        <input class="info-input" type="text" name="title" placeholder="填写书名" value="{{bookData.title}}" bindinput="modifyTitle" disabled="{{isEdit}}" />
       </view>
       <view class="scan-item">
         <view class="title">作者:</view>
-        <view class="view-text">{{bookData.author}}</view>
+        <input class="info-input" type="text" name="author" placeholder="填写作者" value="{{bookData.author}}" bindinput="modifyAuthor" disabled="{{isEdit}}" />
       </view>
       <view class="scan-item">
         <view class="title">分类:</view>
-        <view class="view-text">{{bookData.sort}}</view>
+        <picker bindchange="bindPickerChange" value="{{sortIndex}}" range-key="value" range="{{sortArr}}" disabled="{{isEdit}}">
+          <input class="left" type="text" name="sort" value="{{bookData.sort}}" placeholder="填写分类" hidden="{{bookData.sort}}" disabled />
+          <view class="info-input" hidden="{{!bookData.sort}}">{{sortArr[sortIndex].value}}</view>
+        </picker>
       </view>
       <view class="scan-item">
         <view class="title">出版社:</view>
-        <view class="view-text">{{bookData.pub}}</view>
+        <input class="info-input" type="text" name="pub" placeholder="填写出版社" value="{{bookData.pub}}" bindinput="modifyPub" disabled="{{isEdit}}" />
       </view>
       <view class="scan-item">
         <view class="title">译者:</view>
-        <view class="view-text">{{bookData.translator}}</view>
+        <input class="info-input" type="text" name="translator" placeholder="填写译者" value="{{bookData.translator}}" bindinput="modifyTranslator" disabled="{{isEdit}}" />
       </view>
       <view class="scan-item">
         <view class="title">出版年:</view>
-        <view class="view-text">{{bookData.publication}}</view>
+        <input type="text" name="publication" placeholder="填写出版年" value="{{bookData.publication}}" disabled hidden />
+        <picker mode="date" end="{{endDate}}" value="{{bookData.publication}}" bindchange="modifyPublication" disabled="{{isEdit}}">
+          <view class="info-input">{{bookData.publication}}</view>
+        </picker>
       </view>
       <view class="scan-item">
         <view class="title">页数:</view>
-        <view class="view-text">{{bookData.pages}}</view>
+        <input class="info-input" type="text" name="pages" placeholder="填写页数" value="{{bookData.pages}}" bindinput="modifyPages" disabled="{{isEdit}}" />
       </view>
       <view class="scan-item">
         <view class="title">定价:</view>
-        <view class="view-text">{{bookData.price}}</view>
+        <input class="info-input" type="text" name="price" placeholder="填写定价" value="{{bookData.price}}" bindinput="modifyPrice" disabled="{{isEdit}}" />
       </view>
       <view class="scan-item">
         <view class="title">装帧:</view>
-        <view class="view-text">{{bookData.framing}}</view>
+        <input class="info-input" type="text" name="framing" placeholder="填写装帧" value="{{bookData.framing}}" bindinput="modifyFraming" disabled="{{isEdit}}" />
       </view>
       <view class="scan-item">
         <view class="title">丛书:</view>
-        <view class="view-text">{{bookData.series}}</view>
+        <input class="info-input" type="text" name="series" placeholder="填写丛书" value="{{bookData.series}}" bindinput="modifySeries" disabled="{{isEdit}}" />
       </view>
       <view class="scan-item">
         <view class="title">ISBN:</view>
-        <view class="view-text">{{bookData.isbn}}</view>
+        <input class="info-input" type="text" name="isbn" placeholder="填写ISBN" value="{{bookData.isbn}}" bindinput="modifyISBN" disabled="{{isEdit}}" />
       </view>
       <view class="scan-item">
         <view class="title">存放位置:</view>
-        <view class="view-text">{{bookData.location}}</view>
+        <input class="info-input" type="text" name="location" placeholder="填写存放位置" value="{{bookData.location}}" bindinput="modifyLocation" disabled="{{isEdit}}" />
       </view>
-      
     </view>
   </form>
-  <view class="borrow-btn">
-    <!-- 1借书， 2还书 -->
-    <button size="default" type="primary" bindtap="borrowOrReturn">{{borrowType === '1' ? '扫码借阅' : '扫码还书'}}</button>
-  </view>
+  <block wx:if="{{borrowType === '3'}}">
+    <view class="borrow-btn">
+      <button size="mini" type="primary" bindtap="editOrSave" style="margin-right: 50rpx;">{{isEdit ? '编辑' : '保存'}}</button>
+      <button size="mini" type="warn" bindtap="delete">删除</button>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="borrow-btn">
+      <!-- 1借书， 2还书 -->
+      <button size="default" type="primary" bindtap="borrowOrReturn">{{borrowType === '1' ? '扫码借阅' : '扫码还书'}}</button>
+    </view>
+  </block>
 </view>

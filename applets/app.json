@@ -9,7 +9,8 @@
     "pages/login/login",
     "pages/register/register",
     "pages/qrCode/qrCode",
-    "pages/bookCity/bookCity"
+    "pages/bookCity/bookCity",
+    "pages/management/management"
   ],
   "window": {
     "backgroundTextStyle": "light",

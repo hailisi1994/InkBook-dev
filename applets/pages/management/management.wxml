@@ -1,0 +1,59 @@
+<!--pages/management/management.wxml-->
+<view class="index-inner">
+  <view wx:if="{{loadingMask}}" class="loading-mask"></view>
+  <view class="">
+    <!-- 搜索框 -->
+    <view class="sb-search">
+      <view class="search-input">
+        <view class="sort-wrap">
+          <picker bindchange="bindPickerChange" range-key="value" value="{{sortIndex}}" range="{{sortArray}}">
+            <view class="search-wrap">
+              <view class="">{{sortArray[sortIndex].value}}</view>
+              <view class="search-up-icon"></view>
+            </view>
+          </picker>
+        </view>
+        <view class="sort-wrap" wx:if="{{sortIndex === '1'}}">
+          <picker bindchange="bindPickerChange1" range-key="value" value="{{sort1Index}}" range="{{sort1Array}}">
+            <view class="search-wrap">
+              <view class="">{{sort1Array[sort1Index].value}}</view>
+              <view class="search-up-icon"></view>
+            </view>
+          </picker>
+        </view>
+        <view class="search-text-wrap" wx:if="{{sortIndex !== '1'}}">
+          <input type="text" value="{{searchText}}" placeholder="搜索" confirm-type="search" bindinput="getSearchText" bindconfirm="search" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 搜索到的内容 -->
+    <view class="search-info">
+      <view wx:if="{{bookList.length}}">
+        <view wx:if="{{totalSizes > 0}}" class="totalSizes">共有{{totalSizes}}条结果</view>
+        <view class="search-list">
+          <view data-id="{{item.id}}" class="search-item" bindtap="jumpView" wx:for="{{bookList}}" wx:key="id">
+            <image class="coverUrl" src="{{item.coverUrl}}" mode="aspectFit"></image>
+            <view class="info-wrap">
+              <view class="view-text">书名: {{item.title}}</view>
+              <view class="view-text">{{item.pub}}</view>
+              <view class="view-text">作者: {{item.author}}</view>
+              <view class="view-text">时间: {{item.publication}}</view>
+              <view class="view-text">价格: {{item.price}}</view>
+            </view>
+          </view>
+        </view>
+        <!-- 加载提示loading -->
+        <block>
+          <!-- 加载中 -->
+          <view wx:if="{{isLoading}}" class="loadStatus">加载中...</view>
+          <!-- 加载完毕 -->
+          <view wx:if="{{totalPage === bookList.length}}" class="loadStatus">已加载完毕</view>
+        </block>
+      </view>
+
+      <!-- 暂无内容 -->
+      <view class="no_message" wx:else>暂无内容</view>
+    </view>
+  </view>
+</view>

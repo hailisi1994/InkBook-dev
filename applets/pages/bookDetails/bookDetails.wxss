@@ -29,4 +29,8 @@
 }
 .borrow-btn {
   padding: 36px 0 30rpx 0;
+  text-align: center;
+}
+.info-input {
+  width: 400rpx;
 }
