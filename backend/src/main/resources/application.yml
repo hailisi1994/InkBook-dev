@@ -1,5 +1,9 @@
 server:
-  port: 8080
+  port: 443
+  ssl:
+    key-store: classpath:3628159_www.hailisi.xyz.pfx
+    key-store-password: ICcfO6P6
+    key-store-type: PKCS12
 
 
 
@@ -37,5 +41,7 @@ openidUrl: "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_c
 
 appid: wx0055f7d73b1fabd5
 secret: 8ac40fdd69b40cbd6a67bf5f29736582
+
+
 
 
