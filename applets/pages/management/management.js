@@ -1,4 +1,4 @@
-// pages/index/index.js
+// pages/management/management.js
 import utils from '../../utils/util.js'
 import wxRequest from '../../utils/wxRequest.js'
 const { postRequest } = wxRequest;
@@ -11,10 +11,6 @@ Page({
    */
   data: {
     loadingMask: true,
-    // role: 0用户 1管理员
-    role: 0,
-
-    // 学生的数据
     isLoading: true,
     curentPage: 1, // 当前页数
     totalSizes: 0, // 内容总条数
@@ -54,11 +50,7 @@ Page({
       },
     ],
     searchText: '',
-
-    // 管理员的数据
   },
-
-  // 学生页面的事件-----
 
   // 获取列表数据
   getData: function (isRefresh = false) {
@@ -93,14 +85,14 @@ Page({
         pageSize: 5,
       },
     };
-    console.log('params', params);
+    // console.log('params', params);
     wx.showLoading({
       title: '加载中...',
       mask: true,
     });
     postRequest('/book/list', params).then(res => {
       wx.hideLoading();
-      console.log('res', res);
+      // console.log('res', res);
       const { data } = res;
       let { bookList } = that.data;
       if (isRefresh) { // isRefresh 是否刷新请求
@@ -115,6 +107,7 @@ Page({
           curentPage: data.data.pagination.page,
           totalSizes: data.data.pagination.total,
           isLoading: false,
+          loadingMask: false,
         });
       }
     });
@@ -160,43 +153,18 @@ Page({
 
   // 点击跳转到详情页
   jumpView: function (e) {
+    const that = this;
     const { bookList } = this.data;
     const { id } = e.currentTarget.dataset;
     // type: 1借书， 2还书
     wx.navigateTo({
-      url: `../bookDetails/bookDetails?bookId=${id}&type=1`,
-    });
-  },
-  // 学生页面的事件----end
-
-
-  // 管理员页面的事件----
-
-  //（管理员）扫描确认给学生借书
-  borrowBook: function () {
-    wx.navigateTo({
-      url: '../borrowDetails/borrowDetails?borrowType=1',
-    });
-  },
-
-  // 管理员录书
-  goToScanView: function () {
-    wx.navigateTo({
-      url: '../scan/scan',
-    })
-  },
-
-  //（管理员）扫描确认学生还书
-  returnBook: function () {
-    wx.navigateTo({
-      url: '../borrowDetails/borrowDetails?borrowType=2',
-    });
-  },
-
-  // 点击管理
-  management: function () {
-    wx.navigateTo({
-      url: '../management/management',
+      url: `../bookDetails/bookDetails?bookId=${id}&type=3`,
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        onHandChange: function () {
+          that.getData(true);
+        },
+      },
     });
   },
 
@@ -204,25 +172,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log('onLoad', options);
-    // const that = this;
-    // // 判断有没有登录过
-    // const userInfo = wx.getStorageSync('userInfo');
-    // if (userInfo) { // 有登录过
-    //   const { role } = userInfo;
-    //   // role: 0用户 1管理员
-    //   if (role === 0) {
-    //     that.getData(true);
-    //   }
-    //   that.setData({
-    //     role,
-    //     loadingMask: false,
-    //   });
-    // } else { // 退回登录页面
-    //   wx.redirectTo({
-    //     url: '../login/login',
-    //   });
-    // }
+    this.getData(true);
   },
 
   /**
@@ -234,26 +184,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    const that = this;
-    // 判断有没有登录过
-    const userInfo = wx.getStorageSync('userInfo');
-    if (userInfo) { // 有登录过
-      const { role } = userInfo;
-      // role: 0用户 1管理员
-      if (role === 0) {
-        that.getData(true);
-      }
-      that.setData({
-        role,
-        loadingMask: false,
-      });
-    } else { // 退回登录页面
-      wx.redirectTo({
-        url: '../login/login',
-      });
-    }
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -280,7 +211,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // 学生页面的触底事件
     const that = this;
     const { role } = that.data;
     const userInfo = wx.getStorageSync('userInfo');
