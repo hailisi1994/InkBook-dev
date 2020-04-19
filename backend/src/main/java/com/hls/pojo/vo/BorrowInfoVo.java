@@ -1,6 +1,7 @@
 package com.hls.pojo.vo;
 
 import com.hls.pojo.Book;
+import com.hls.pojo.Borrow;
 import com.hls.pojo.User;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -16,4 +17,5 @@ import lombok.experimental.Accessors;
 public class BorrowInfoVo {
     private User user;
     private Book book;
+    private Borrow borrow;
 }
