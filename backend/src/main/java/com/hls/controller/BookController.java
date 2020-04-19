@@ -64,4 +64,19 @@ public class BookController {
         return ResponseEntity.okMap(bookService.list(bookQueryDTO));
     }
 
+    /**
+     * 通过主键查询单条数据
+     *
+     * @param id 主键
+     * @return 单条数据
+     */
+    @ApiOperation("根据id查询图书")
+    @GetMapping("/delete/{id}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "", required = true, paramType = "query", dataType = "String", example = "0"),
+    })
+    public void delete(@PathVariable("id") String id) {
+        this.bookService.deleteById(id);
+    }
+
 }
