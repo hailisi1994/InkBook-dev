@@ -4,6 +4,34 @@ import wxRequest from '../../utils/wxRequest.js'
 const { getRequest } = wxRequest;
 const { formatDate } = utils;
 
+//引入echart
+import * as echarts from '../../ec-canvas/echarts';
+const app = getApp();
+
+function setOption(chart,data) {
+ 
+  var option = {
+    backgroundColor: "#ffffff",
+    color: [ "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+    series: [{
+      label: {
+        normal: {
+          fontSize: 14
+        }
+      },
+      type: 'pie',
+      center: ['50%', '50%'],
+      radius: ['40%', '55%'],
+      data: data
+    }]
+  };
+
+  chart.setOption(option);
+  return chart;
+}
+
+
+
 Page({
 
   /**
@@ -21,6 +49,10 @@ Page({
     expiringCount: '', // 即将到期
     totalCount: '',
     userInfo: {},
+    ec: { 
+      // 将 lazyLoad 设为 true 后，需要手动初始化图表
+      lazyLoad: true
+     }
   },
 
   // 退出登录
@@ -29,6 +61,26 @@ Page({
     wx.removeStorageSync('userInfo');
     wx.redirectTo({
       url: '../login/login',
+    });
+  },
+  //初始化统计图
+  initChart(data) {
+    this.ecComponent.init((canvas, width, height, dpr) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr // new
+      });
+      setOption(chart,data);
+      // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+      this.chart = chart;
+      this.setData({
+        isLoaded: true
+      });
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
     });
   },
 
@@ -99,14 +151,30 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    const that = this;
+    // 获取echart组件
+    this.ecComponent = this.selectComponent('#mychart-dom-pie');
+    const userInfo = wx.getStorageSync('userInfo');
+    if (userInfo && userInfo.role === 1) {
+      //管理员获取统计数据
+      getRequest(`/borrow/getPieChartData`).then(
+        res => {
+          if (res.data.status == 200) {
+            var pieChartData = res.data.data.pieChartData
+            console.log(pieChartData)
+            that.initChart(pieChartData);
+          }
+        }
+      );
 
+    }
   },
 
   /**

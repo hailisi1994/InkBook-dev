@@ -41,6 +41,8 @@
     </view>
     
     <!-- 管理员页面 -->
-    <view wx:else>管理员页面</view>
+    <view class="canvacontainer" wx:else>
+      <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" ></ec-canvas>
+    </view>
   </view>
 </view>
